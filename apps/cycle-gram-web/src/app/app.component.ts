@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { OnInit } from '@angular/core';
-import { initFlowbite } from '@flowbite';
 import { RouterModule } from '@angular/router';
 import { NxWelcomeComponent } from './nx-welcome.component';
 import { FeaturesModule } from '@cycle-gram-web-main/cycle-gram/features';
@@ -13,10 +11,6 @@ import { FeaturesModule } from '@cycle-gram-web-main/cycle-gram/features';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit{
+export class AppComponent {
   title = 'cycle-gram-web';
-
-  ngOnInit() : void {
-    initFlowbite();
-  }
 }
