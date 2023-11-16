@@ -1,0 +1,28 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@cycle-gram-web-main/backend/dto": ["libs/backend/dto/src/index.ts"],
+      "@cycle-gram-web-main/backend/features": ["libs/backend/features/src/index.ts"],
+      "@cycle-gram-web-main/cycle-gram/features": [
+        "libs/cycle-gram/features/src/index.ts"
+      ],
+      "@cycle-gram-web-main/shared/api": ["libs/shared/api/src/index.ts"],
+      "@cycle-gram-web-main/ui": ["libs/cycle-gram/ui/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

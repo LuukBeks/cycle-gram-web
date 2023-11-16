@@ -1,0 +1,25 @@
+import { Controller } from '@nestjs/common';
+import { UserService } from '../user.service';
+import { Get, Param, Post, Body } from '@nestjs/common';
+import { IUser } from '@cycle-gram-web-main/shared/api';
+import { CreateUserDto } from '@cycle-gram-web-main/backend/dto';
+
+@Controller('meal')
+export class MealController {
+    constructor(private userService: UserService) {}
+
+    @Get('')
+    getAll(): IUser[] {
+        return this.userService.getAll();
+    }
+
+    @Get(':id')
+    getOne(@Param('id') id: string): IUser {
+        return this.userService.getOne(id);
+    }
+
+    @Post('')
+    create(@Body() data: CreateUserDto): IUser {
+        return this.userService.create(data);
+    }
+}
