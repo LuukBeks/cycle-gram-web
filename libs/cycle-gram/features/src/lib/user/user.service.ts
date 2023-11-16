@@ -31,12 +31,12 @@ export class UserService { // Updated service class name
         console.log(`list ${this.endpoint}`);
 
         return this.http
-            .get<ApiResponse<IUser[]>>(this.endpoint, { // Updated interface
+            .get<ApiResponse<IUser[]>>(this.endpoint, {
                 ...options,
                 ...httpOptions,
             })
             .pipe(
-                map((response: any) => response.results as IUser[]), // Updated interface
+                map((response: any) => response.results as IUser[]),
                 tap(console.log),
                 catchError(this.handleError)
             );
@@ -49,13 +49,13 @@ export class UserService { // Updated service class name
     public read(id: string | null, options?: any): Observable<IUser> { // Updated interface
         console.log(`read ${this.endpoint}`);
         return this.http
-            .get<ApiResponse<IUser>>(this.endpoint, { // Updated interface
+            .get<ApiResponse<IUser>>(this.endpoint, {
                 ...options,
                 ...httpOptions,
             })
             .pipe(
                 tap(console.log),
-                map((response: any) => response.results as IUser), // Updated interface
+                map((response: any) => response.results as IUser),
                 catchError(this.handleError)
             );
     }

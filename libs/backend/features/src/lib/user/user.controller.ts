@@ -4,8 +4,8 @@ import { Get, Param, Post, Body } from '@nestjs/common';
 import { IUser } from '@cycle-gram-web-main/shared/api';
 import { CreateUserDto } from '@cycle-gram-web-main/backend/dto';
 
-@Controller('meal')
-export class MealController {
+@Controller('user')
+export class UserController {
     constructor(private userService: UserService) {}
 
     @Get('')
