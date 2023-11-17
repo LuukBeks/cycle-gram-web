@@ -1,5 +1,33 @@
-<div *ngFor="let user of users">
-    <h2>{{ user.name}}</h2>
-    <p>mail: {{ user.email }}</p>
-    <p>date: {{ user.dob | date: 'long' }}</p>
+<div class="mb-4">
+    <button class="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-700 mb-4">Add User</button>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <!-- Card for each user -->
+        <div *ngFor="let user of users" class="max-w-md mx-auto bg-white rounded overflow-hidden shadow-lg">
+            <div class="p-4">
+                <div class="flex items-center mb-4">
+                    <!-- User Image -->
+                    <div class="flex-shrink-0">
+                        <img class="h-12 w-12 rounded-full" src="{{ user.image }}" alt="User Image">
+                    </div>
+                    <!-- User Details -->
+                    <div class="ml-3">
+                        <!-- Edit the user name to be clickable -->
+                        <p class="text-lg font-semibold text-blue-500 cursor-pointer">{{ user.name }}</p>
+                        <!-- Format the date of birth -->
+                        <p class="text-sm text-gray-600">Date of Birth: {{ user.dob }}</p>
+                        <p class="text-sm text-gray-600">Email: {{ user.email }}</p>
+                    </div>
+                    <!-- Delete Buttons -->
+                    <div class="ml-auto flex items-center">
+                        <!-- Delete button with bin icon -->
+                        <button class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 14h12l3-14H3zm10 3v8M8 9v8"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

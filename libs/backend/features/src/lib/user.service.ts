@@ -15,8 +15,8 @@ export class UserService {
             email: 'john.doe@example.com',
             phoneNumber: '123-456-7890',
             password: 'password123',
-            image: '',
-            sort: UserSort.Breakfast,
+            image: 'https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg',
+            sort: UserSort.Admin,
         },
         {
             id: '1',
@@ -25,8 +25,8 @@ export class UserService {
             email: 'jane.doe@example.com',
             phoneNumber: '987-654-3210',
             password: 'securepassword',
-            image: '',
-            sort: UserSort.Breakfast,
+            image: 'https://thumbs.dreamstime.com/z/happy-man-okay-sign-portrait-white-background-showing-31418338.jpg',
+            sort: UserSort.Guest,
         }
     ]);
 

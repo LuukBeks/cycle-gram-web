@@ -1,9 +1,8 @@
 import { Id } from './id.type';
 
 export enum UserSort { // Updated enum name
-    Breakfast = 'Breakfast',
-    Lunch = 'Lunch',
-    Dinner = 'Dinner',
+    Admin = 'Admin',
+    Guest = 'Guest',
     Other = 'Other'
 }
 
