@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class UserListComponent implements OnInit, OnDestroy { // Updated class name
     users: IUser[] | null = null; // Updated interface
+    userId: string | null = null;
     subscription: Subscription | undefined = undefined;
 
     constructor(private userService: UserService) { // Updated service injection

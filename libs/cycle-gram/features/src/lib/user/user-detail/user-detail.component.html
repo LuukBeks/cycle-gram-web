@@ -1,0 +1,23 @@
+<!-- user-detail.component.html -->
+
+<div *ngIf="(user$ | async) !== null; else loading">
+    <h2>User Detail</h2>
+    <div>
+      <strong>User ID:</strong> {{ userId }}
+    </div>
+    <div>
+      <strong>Name:</strong> {{ (user$ | async)?.name }}
+    </div>
+    <div>
+      <strong>Date of Birth:</strong> {{ (user$ | async)?.dob | date:'mediumDate' }}
+    </div>
+    <div>
+      <strong>Email:</strong> {{ (user$ | async)?.email }}
+    </div>
+    <!-- Add other user details as needed -->
+  </div>
+  
+  <ng-template #loading>
+    <p>Loading user details...</p>
+  </ng-template>
+  
