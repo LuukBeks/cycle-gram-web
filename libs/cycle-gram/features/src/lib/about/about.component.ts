@@ -4,4 +4,10 @@ import { Component } from '@angular/core';
   selector: 'cycle-gram-web-main-about',
   templateUrl: './about.component.html',
 })
-export class AboutComponent {}
+export class AboutComponent {
+  title = 'About';
+  imagePath?: string;
+  constructor() {
+    this.imagePath = 'assets/images/cycle-gram-erd.png';
+  }
+}
