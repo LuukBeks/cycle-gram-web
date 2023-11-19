@@ -5,37 +5,33 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
-import { ApiResponse, IUser } from '@cycle-gram-web-main/shared/api'; // Updated import
+import { ApiResponse, IUser } from '@cycle-gram-web-main/shared/api';
 import { Injectable } from '@angular/core';
+import { environment } from '@cycle-gram-web/shared/util-env'; // Change alias to getEnvironment
 
-/**
- * See https://angular.io/guide/http#requesting-data-from-a-server
- */
 export const httpOptions = {
   observe: 'body',
   responseType: 'json',
 };
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class UserService {
-  // Updated service class name
-  endpoint = 'http://localhost:3000/api/user'; // Updated endpoint
+  // Invoke the function to get the environment object
+  // Use the environment object to access backendUrl
+  endpoint = `${environment.backendUrl}/user`;
 
   constructor(private readonly http: HttpClient) {}
 
-  /**
-   * Get all items.
-   *
-   * @options options - optional URL queryparam options
-   */
   public list(options?: any): Observable<IUser[] | null> {
-    // Updated interface
     console.log(`list ${this.endpoint}`);
 
     return this.http
       .get<ApiResponse<IUser[]>>(this.endpoint, {
         ...options,
-        ...httpOptions,
+        observe: 'body',
+        responseType: 'json',
       })
       .pipe(
         map((response: any) => response.results as IUser[]),
@@ -44,16 +40,13 @@ export class UserService {
       );
   }
 
-  /**
-   * Get a single item from the service.
-   *
-   */
   public read(id: string | null, options?: any): Observable<IUser> {
-    console.log(`read ${this.endpoint}`);
+    console.log(`read ${this.endpoint}/${id}`);
     return this.http
       .get<ApiResponse<IUser>>(`${this.endpoint}/${id}`, {
         ...options,
-        ...httpOptions,
+        observe: 'body',
+        responseType: 'json',
       })
       .pipe(
         tap(console.log),
@@ -92,12 +85,8 @@ export class UserService {
       .pipe(tap(console.log), catchError(this.handleError));
   }
 
-  /**
-   * Handle errors.
-   */
-  public handleError(error: HttpErrorResponse): Observable<any> {
+  private handleError(error: HttpErrorResponse): Observable<any> {
     console.log('handleError in UserService', error);
-
     return throwError(() => new Error(error.message));
   }
 }

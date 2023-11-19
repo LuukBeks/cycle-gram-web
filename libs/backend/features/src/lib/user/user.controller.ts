@@ -1,4 +1,4 @@
-import { Controller, Put } from '@nestjs/common';
+import { Controller, Put, Delete } from '@nestjs/common';
 import { UserService } from '../user.service';
 import { Get, Param, Post, Body } from '@nestjs/common';
 import { IUser } from '@cycle-gram-web-main/shared/api';
@@ -26,5 +26,10 @@ export class UserController {
     @Put(':id')
     update(@Param('id') id: string, @Body() data: IUser): IUser {
         return this.userService.update(id, data);
+    }
+
+    @Delete(':id')
+    deleteUser(@Param('id') id: string): void {
+        this.userService.deleteUser(id);
     }
 }

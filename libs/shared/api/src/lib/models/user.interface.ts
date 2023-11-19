@@ -1,5 +1,5 @@
-import { Id } from './id.type';
 import { UserSort } from 'libs/cycle-gram/features/src/lib/user/user.model';
+import { Id } from './id.type';
 
 export interface IUser { // Updated interface name
     id: Id;

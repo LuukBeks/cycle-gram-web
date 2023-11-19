@@ -23,7 +23,8 @@
         "libs/cycle-gram/features/src/index.ts"
       ],
       "@cycle-gram-web-main/shared/api": ["libs/shared/api/src/index.ts"],
-      "@cycle-gram-web-main/ui": ["libs/cycle-gram/ui/src/index.ts"]
+      "@cycle-gram-web-main/ui": ["libs/cycle-gram/ui/src/index.ts"],
+      "@cycle-gram-web/shared/util-env": ["libs/shared/util-env/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

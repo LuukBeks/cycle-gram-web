@@ -79,4 +79,16 @@ export class UserService {
         this.users$.next(current);
         return updatedUser;
     }
+
+    deleteUser(id: string): void {
+        const index = this.users$.value.findIndex((td) => td.id == id);
+        if (index == -1) {
+          throw new Error(`Could not find user with id ${id}`);
+        }
+    
+        this.users$.next([
+          ...this.users$.value.slice(0, index),
+          ...this.users$.value.slice(index + 1),
+        ]);
+      }
 }

@@ -57,6 +57,7 @@ export class UserDeleteComponent {
       console.error('User id is missing for deletion.');
     }
   }
+  
 
   goBack(): void {
     this.router.navigate(['/users']);
