@@ -7,7 +7,7 @@ import {
 import { map, catchError, tap } from 'rxjs/operators';
 import { ApiResponse, IUser } from '@cycle-gram-web-main/shared/api';
 import { Injectable } from '@angular/core';
-import { environment } from '@cycle-gram-web/shared/util-env'; // Change alias to getEnvironment
+import { environment } from '@cycle-gram-web/shared/util-env';
 
 export const httpOptions = {
   observe: 'body',
@@ -18,8 +18,6 @@ export const httpOptions = {
   providedIn: 'root',
 })
 export class UserService {
-  // Invoke the function to get the environment object
-  // Use the environment object to access backendUrl
   endpoint = `${environment.backendUrl}/user`;
 
   constructor(private readonly http: HttpClient) {}

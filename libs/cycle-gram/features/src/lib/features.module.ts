@@ -11,7 +11,7 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserDeleteComponent } from './user/user-delete/user-delete.component';
 
 @NgModule({
-  imports: [CommonModule, HttpClientModule, RouterModule, FormsModule], // Add FormsModule
+  imports: [CommonModule, HttpClientModule, RouterModule, FormsModule],
   declarations: [UserListComponent, UserDetailComponent, AboutComponent, UserEditComponent, UserDeleteComponent],
   providers: [UserService],
   exports: [UserListComponent, UserDetailComponent, AboutComponent, UserEditComponent, UserDeleteComponent]
