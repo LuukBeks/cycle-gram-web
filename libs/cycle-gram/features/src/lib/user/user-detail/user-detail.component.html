@@ -1,23 +1,32 @@
-<!-- user-detail.component.html -->
-
-<div *ngIf="(user$ | async) !== null; else loading">
-    <h2>User Detail</h2>
-    <div>
-      <strong>User ID:</strong> {{ userId }}
+<div class="max-w-md mx-auto my-8 p-4 bg-white rounded-md shadow-md">
+  <div *ngIf="(user$ | async) !== null; else loading">
+    <div class="flex items-center mb-4">
+      <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
+        <!-- Assuming user.image is the URL to the profile picture -->
+        <img [src]="(user$ | async)?.image" alt="User Profile" class="w-full h-full object-cover" />
+      </div>
+      <div>
+        <h2 class="text-2xl font-bold">{{ (user$ | async)?.name }}</h2>
+        <p class="text-gray-600">{{ (user$ | async)?.email }}</p>
+      </div>
     </div>
-    <div>
-      <strong>Name:</strong> {{ (user$ | async)?.name }}
-    </div>
-    <div>
+    
+    <div class="mb-2">
       <strong>Date of Birth:</strong> {{ (user$ | async)?.dob | date:'mediumDate' }}
     </div>
-    <div>
-      <strong>Email:</strong> {{ (user$ | async)?.email }}
+    <div class="mb-2">
+      <strong>Phone Number:</strong> {{ (user$ | async)?.phoneNumber }}
     </div>
-    <!-- Add other user details as needed -->
+    <div class="mb-2">
+      <strong>User Type:</strong> {{ (user$ | async)?.sort }}
+    </div>
+    
+    <button routerLink="/users/{{ userId }}/edit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue">
+      Edit User
+    </button>
   </div>
-  
+
   <ng-template #loading>
-    <p>Loading user details...</p>
+    <p class="text-gray-800">Loading user details...</p>
   </ng-template>
-  
+</div>

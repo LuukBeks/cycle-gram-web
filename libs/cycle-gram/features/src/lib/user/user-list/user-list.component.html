@@ -1,5 +1,5 @@
 <div class="mb-4">
-    <button class="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-700 mb-4" routerLink="/user/create">Add User</button>
+    <button class="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-700 mb-4" routerLink="/user/create" >Add User</button>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <!-- Card for each user -->
         <div *ngFor="let user of users" class="max-w-md mx-auto bg-white rounded overflow-hidden shadow-lg">
@@ -14,7 +14,7 @@
                         <!-- Edit the user name to be clickable -->
                         <p class="text-lg font-semibold text-blue-500 cursor-pointer" routerLink="{{user.id}}">{{ user.name }}</p>
                         <!-- Format the date of birth -->
-                        <p class="text-sm text-gray-600">Date of Birth: {{ user.dob }}</p>
+                        <p class="text-sm text-gray-600">Date of Birth: {{ user.dob | date:'mediumDate' }}</p>
                         <p class="text-sm text-gray-600">Email: {{ user.email }}</p>
                     </div>
                     <!-- Delete Buttons -->

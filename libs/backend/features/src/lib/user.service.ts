@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { IUser, UserSort } from '@cycle-gram-web-main/shared/api';
+import { IUser } from '@cycle-gram-web-main/shared/api';
+import { UserSort } from 'libs/cycle-gram/features/src/lib/user/user.model';
 import { BehaviorSubject } from 'rxjs';
 import { Logger } from '@nestjs/common';
 

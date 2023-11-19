@@ -1,5 +1,6 @@
 import { IsNotEmpty, IsString, IsOptional } from 'class-validator';
-import { UserSort, ICreateUser, IUpdateUser, IUpsertUser } from '@cycle-gram-web-main/shared/api';
+import { ICreateUser, IUpdateUser, IUpsertUser } from '@cycle-gram-web-main/shared/api';
+import { UserSort } from 'libs/cycle-gram/features/src/lib/user/user.model';
 
 export class CreateUserDto implements ICreateUser {
   @IsString()

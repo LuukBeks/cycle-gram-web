@@ -1,10 +1,5 @@
 import { Id } from './id.type';
-
-export enum UserSort { // Updated enum name
-    Admin = 'Admin',
-    Guest = 'Guest',
-    Other = 'Other'
-}
+import { UserSort } from 'libs/cycle-gram/features/src/lib/user/user.model';
 
 export interface IUser { // Updated interface name
     id: Id;
