@@ -100,4 +100,3 @@ jobs:
         with:
           publish-profile: ${{ secrets.NEXTJS_PUBLISHPROFILE }}
           package: .
-          app-name: 'cycle-gram-api'
