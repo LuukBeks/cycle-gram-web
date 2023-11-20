@@ -60,7 +60,7 @@ jobs:
           name: frontend-app
 
       - name: Unzip artifact for deployment
-        run: unzip frontend-app-release.zip
+        run: unzip frontend-app-release.zip -d cycle-gram-web
         
       - name: Deploy to static Azure Web App
         id: builddeploy
@@ -69,9 +69,10 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.ANGULAR_PUBLISHTOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "/"  # Set this to the root of your application
-          api_location: ""
-          output_location: ""
+          app_location: "cycle-gram-web"  # Set this to the root of your application
+          # api_location: ""
+          # output_location: ""
+          skip_app_build: true
  
 
   deploy-backend-api:
