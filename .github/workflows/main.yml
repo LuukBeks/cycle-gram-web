@@ -71,7 +71,7 @@ jobs:
           action: "upload"
           app_location: "/"  # Set this to the root of your application
           api_location: ""
-          output_location: "./"
+          output_location: "dist"
 
 
   deploy-backend-api:
