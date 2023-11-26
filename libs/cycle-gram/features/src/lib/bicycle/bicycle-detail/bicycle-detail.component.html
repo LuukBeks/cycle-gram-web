@@ -1,0 +1,33 @@
+<div class="container mx-auto mt-8 p-8 bg-white rounded-md shadow-md">
+  <ng-container *ngIf="(bicycle$ | async) as bicycle; else loading">
+    <div class="flex flex-col md:flex-row items-center">
+      <div class="md:mr-8">
+        <img [src]="bicycle.image" alt="Bicycle Profile" class="w-full h-auto md:w-64 rounded-md shadow-md" />
+      </div>
+      <div class="mt-4 md:mt-0">
+        <h1 class="text-3xl font-bold">{{ bicycle.bicycleName }}</h1>
+        <p class="text-gray-600">{{ bicycle.Brand }}</p>
+        <div class="mt-4">
+          <strong>Weight:</strong> {{ bicycle.weight }}
+        </div>
+        <div class="mt-2">
+          <strong>Sort:</strong> {{ bicycle.sort }}
+        </div>
+        <div class="mt-2">
+          <strong>Groupset:</strong> {{ bicycle.groupset }}
+        </div>
+        <div class="mt-2">
+          <strong>Bicycle Type:</strong> {{ bicycle.sort }}
+        </div>
+        <button routerLink="/bicycles/{{ bicycleId }}/edit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue">
+          Edit Bicycle
+        </button>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <p class="text-gray-800">Loading bicycle details...</p>
+  </ng-template>
+</div>
+`

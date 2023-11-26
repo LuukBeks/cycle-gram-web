@@ -4,3 +4,7 @@ export * from './lib/user/user-detail/user-detail.component';
 export * from './lib/about/about.component';
 export * from './lib/user/user-edit/user-edit.component';
 export * from './lib/user/user-delete/user-delete.component';
+export * from './lib/bicycle/bicycle-list/bicycle-list.component';
+export * from './lib/bicycle/bicycle-detail/bicycle-detail.component';
+export * from './lib/bicycle/bicycle-edit/bicycle-edit.component';
+export * from './lib/bicycle/bicycle-delete/bicycle-delete.component';

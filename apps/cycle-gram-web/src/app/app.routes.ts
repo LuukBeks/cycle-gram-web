@@ -6,18 +6,22 @@ import {
   UserDetailComponent,
   AboutComponent,
   UserListComponent,
+  BicycleListComponent,
+  BicycleDetailComponent,
+  BicycleEditComponent,
+  BicycleDeleteComponent,
 } from '@cycle-gram-web-main/cycle-gram/features';
 
 export const appRoutes: Route[] = [
-  {
-    path: 'users',
-    pathMatch: 'full',
-    component: UserListComponent,
-  },
-  {
+  { //about
     path: 'about',
     pathMatch: 'full',
     component: AboutComponent,
+  },
+  { //users
+    path: 'users',
+    pathMatch: 'full',
+    component: UserListComponent,
   },
   {
     path: 'users/:id',
@@ -38,6 +42,31 @@ export const appRoutes: Route[] = [
     path: 'user/create', 
     pathMatch: 'full', 
     component: UserEditComponent 
+  },
+  { //bicycle
+    path: 'bicycles', 
+    pathMatch: 'full', 
+    component: BicycleListComponent 
+  },
+  { 
+    path: 'bicycles/:id', 
+    pathMatch: 'full', 
+    component: BicycleDetailComponent 
+  },    
+  { 
+    path: 'bicycles/:id/edit', 
+    pathMatch: 'full', 
+    component: BicycleEditComponent 
+  },
+  { 
+    path: 'bicycles/:id/delete', 
+    pathMatch: 'full', 
+    component: BicycleDeleteComponent 
+  },
+  { 
+    path: 'bicycle/create', 
+    pathMatch: 'full',
+    component: BicycleEditComponent 
   },
 ];
 
