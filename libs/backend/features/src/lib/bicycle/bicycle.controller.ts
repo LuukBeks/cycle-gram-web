@@ -9,27 +9,27 @@ export class BicycleController {
     constructor(private bicycleService: BicycleService) {}
 
     @Get('')
-    getAll(): IBicycle[] {
+    getAll(): Promise<IBicycle[]> {
         return this.bicycleService.getAll();
     }
 
     @Get(':id')
-    getOne(@Param('id') id: string): IBicycle {
+    getOne(@Param('id') id: string): Promise<IBicycle | null> {
         return this.bicycleService.getOne(id);
     }
 
     @Post('')
-    create(@Body() data: CreateBicycleDto): IBicycle {
+    create(@Body() data: CreateBicycleDto): Promise<IBicycle> {
         return this.bicycleService.create(data);
     }
 
     @Put(':id')
-    update(@Param('id') id: string, @Body() data: IBicycle): IBicycle {
+    update(@Param('id') id: string, @Body() data: IBicycle): Promise<IBicycle | null> {
         return this.bicycleService.update(id, data);
     }
 
     @Delete(':id')
-    deleteBicycle(@Param('id') id: string): void {
-        this.bicycleService.deleteBicycle(id);
+    deleteBicycle(@Param('id') id: string): Promise<void> {
+        return this.bicycleService.deleteBicycle(id);
     }
 }

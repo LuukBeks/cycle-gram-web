@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 import { IUser } from '@cycle-gram-web-main/shared/api';
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { UserSort } from 'libs/cycle-gram/features/src/lib/user/user.model';
 import { IsMongoId } from 'class-validator';
 
@@ -8,6 +9,7 @@ export type UserDocument = User & Document;
 
 @Schema()
 export class User implements IUser {
+  
     @IsMongoId()
     _id!: string;
 

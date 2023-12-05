@@ -1,3 +1,4 @@
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { BicycleType } from 'libs/cycle-gram/features/src/lib/bicycle/bicycle.model';
 import { Id } from './id.type';
 

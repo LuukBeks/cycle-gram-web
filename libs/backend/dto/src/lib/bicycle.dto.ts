@@ -4,6 +4,11 @@ import { ICreateBicycle, IUpdateBicycle, IUpsertBicycle } from '@cycle-gram-web-
 import { BicycleType } from 'libs/cycle-gram/features/src/lib/bicycle/bicycle.model';
 
 export class CreateBicycleDto implements ICreateBicycle {
+
+    @IsString()
+    @IsNotEmpty()
+    id!: string;
+
     @IsString()
     @IsNotEmpty()
     bicycleName!: string;

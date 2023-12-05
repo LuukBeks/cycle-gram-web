@@ -29,11 +29,6 @@ export class UserService {
     return user;
   }
 
-  /**
-   * Update the arg signature to match the DTO, but keep the
-   * return signature - we still want to respond with the complete
-   * object
-   */
   async create(user: CreateUserDto): Promise<IUser> {
     Logger.log('create', this.TAG);
     const lastUser = await this.userModel.findOne().sort({ _id: -1 }).limit(1);
