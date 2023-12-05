@@ -1,5 +1,6 @@
 import { IsNotEmpty, IsString, IsOptional } from 'class-validator';
 import { ICreateBicycle, IUpdateBicycle, IUpsertBicycle } from '@cycle-gram-web-main/shared/api';
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { BicycleType } from 'libs/cycle-gram/features/src/lib/bicycle/bicycle.model';
 
 export class CreateBicycleDto implements ICreateBicycle {

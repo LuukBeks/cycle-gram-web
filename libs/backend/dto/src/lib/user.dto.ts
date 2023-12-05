@@ -1,8 +1,14 @@
 import { IsNotEmpty, IsString, IsOptional } from 'class-validator';
 import { ICreateUser, IUpdateUser, IUpsertUser } from '@cycle-gram-web-main/shared/api';
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { UserSort } from 'libs/cycle-gram/features/src/lib/user/user.model';
 
 export class CreateUserDto implements ICreateUser {
+
+  @IsString()
+  @IsNotEmpty()
+  id!: string;
+
   @IsString()
   @IsNotEmpty()
   name!: string;

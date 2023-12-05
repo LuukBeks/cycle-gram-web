@@ -1,95 +1,57 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
+import { User as UserModel, UserDocument } from './user/user.schema';
 import { IUser } from '@cycle-gram-web-main/shared/api';
-// eslint-disable-next-line @nx/enforce-module-boundaries
-import { UserSort } from 'libs/cycle-gram/features/src/lib/user/user.model';
-import { BehaviorSubject } from 'rxjs';
 import { Logger } from '@nestjs/common';
+import { CreateUserDto, UpdateUserDto } from '@cycle-gram-web-main/backend/dto';
 
 @Injectable()
 export class UserService {
-    TAG = 'UserService';
+  private readonly logger: Logger = new Logger(UserService.name);
 
-    private users$ = new BehaviorSubject<IUser[]>([
-        {
-            id: '0',
-            name: 'John Doe',
-            dob: new Date('1990-01-01'),
-            email: 'john.doe@example.com',
-            phoneNumber: '123-456-7890',
-            password: 'password123',
-            image: 'https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg',
-            sort: UserSort.Admin,
-        },
-        {
-            id: '1',
-            name: 'Jane Doe',
-            dob: new Date('1985-05-15'),
-            email: 'jane.doe@example.com',
-            phoneNumber: '987-654-3210',
-            password: 'securepassword',
-            image: 'https://thumbs.dreamstime.com/z/happy-man-okay-sign-portrait-white-background-showing-31418338.jpg',
-            sort: UserSort.Guest,
-        }
-    ]);
+  constructor(
+    @InjectModel(UserModel.name) private userModel: Model<UserDocument>
+  ) {}
+  TAG = 'UserService';
 
-    getAll(): IUser[] {
-        Logger.log('getAll', this.TAG);
-        return this.users$.value;
+  async getAll(): Promise<IUser[]> {
+    Logger.log('getAll', this.TAG);
+    return await this.userModel.find().exec();
+  }
+
+  async getOne(id: string): Promise<IUser | null> {
+    Logger.log(`getOne(${id})`, this.TAG);
+    const user = await this.userModel.findOne({ id }).exec();
+    if (!user) {
+      throw new NotFoundException(`User could not be found!`);
     }
+    return user;
+  }
 
-    getOne(id: string): IUser {
-        Logger.log(`getOne(${id})`, this.TAG);
-        const user = this.users$.value.find((user) => user.id === id);
-        if (!user) {
-            throw new NotFoundException(`User could not be found!`);
-        }
-        return user;
-    }
+  /**
+   * Update the arg signature to match the DTO, but keep the
+   * return signature - we still want to respond with the complete
+   * object
+   */
+  async create(user: CreateUserDto): Promise<IUser> {
+    Logger.log('create', this.TAG);
+    const lastUser = await this.userModel.findOne().sort({ _id: -1 }).limit(1);
 
-    /**
-     * Update the arg signature to match the DTO, but keep the
-     * return signature - we still want to respond with the complete
-     * object
-     */
-    create(user: Pick<IUser, 'name' | 'image'>): IUser {
-        Logger.log('create', this.TAG);
-        const current = this.users$.value;
-        // Use the incoming data, a randomized ID, and a default value of `false` to create the new to-do
-        const newUser: IUser = {
-            ...user,
-            id: `user-${Math.floor(Math.random() * 10000)}`,
-            isVega: false,
-            dateServed: new Date(),
-        } as unknown as IUser;
-        this.users$.next([...current, newUser]);
-        return newUser;
-    }
+    const newNumericId = lastUser ? parseInt(lastUser.id, 10) + 1 : 1;
 
-    update(id: string, user: IUser): IUser {
-        Logger.log(`update(${id})`, this.TAG);
-        const current = this.users$.value;
-        const index = current.findIndex((user) => user.id === id);
-        if (index === -1) {
-            throw new NotFoundException(`User could not be found!`);
-        }
-        const updatedUser = {
-            ...current[index],
-            ...user,
-        };
-        current[index] = updatedUser;
-        this.users$.next(current);
-        return updatedUser;
-    }
+    user.id = newNumericId.toString();
 
-    deleteUser(id: string): void {
-        const index = this.users$.value.findIndex((td) => td.id == id);
-        if (index == -1) {
-          throw new Error(`Could not find user with id ${id}`);
-        }
-    
-        this.users$.next([
-          ...this.users$.value.slice(0, index),
-          ...this.users$.value.slice(index + 1),
-        ]);
-      }
+    const createdItem = await this.userModel.create(user);
+    return createdItem;
+  }
+
+  async update(id: string, user: UpdateUserDto): Promise<IUser | null> {
+    const updated = await this.userModel.findOneAndUpdate({ id }, user);
+    return updated;
+  }
+
+  async deleteUser(id: string): Promise<void> {
+    this.userModel.findOneAndDelete({ id }).exec();
+  }
 }
