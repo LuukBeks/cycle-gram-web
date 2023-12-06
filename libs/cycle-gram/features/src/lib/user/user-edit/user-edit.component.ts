@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { UserService } from '../user.service';
@@ -10,8 +10,7 @@ import { UserSort } from '../user.model';
   templateUrl: './user-edit.component.html',
   styleUrls: ['./../user-list/user-list.component.css'],
 })
-
-export class UserEditComponent {
+export class UserEditComponent implements OnInit {
   user: IUser = {
     id: '',
     name: '',
@@ -24,13 +23,36 @@ export class UserEditComponent {
   };
   id: string | null = null;
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, private location: Location) {}
+  constructor(
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private location: Location,
+  ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      this.id = params.get('id');
-      if(this.id) {
-        this.userService.read(this.id).subscribe((observable) => {this.user = observable});
+    // Check if the user is authenticated before allowing access
+    if (!this.userService.isAuthenticated()) {
+      // Redirect to the login page or handle unauthorized access
+      this.router.navigate(['/login']);
+    }
+
+    this.route.data.subscribe((data) => {
+      const createMode = data['createMode'];
+
+      if (createMode) {
+        // Handle create mode
+        // You might want to initialize some properties differently for new users
+      } else {
+        // Handle edit mode
+        this.route.paramMap.subscribe((params) => {
+          this.id = params.get('id');
+          if (this.id) {
+            this.userService.read(this.id).subscribe((observable) => {
+              this.user = observable;
+            });
+          }
+        });
       }
     });
   }

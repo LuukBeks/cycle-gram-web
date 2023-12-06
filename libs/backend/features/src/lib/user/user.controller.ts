@@ -32,4 +32,10 @@ export class UserController {
     deleteUser(@Param('id') id: string): Promise<void> {
         return this.userService.deleteUser(id);
     }
+
+    @Post('login')
+    login(@Body() credentials: { email: string; password: string }): Promise<IUser | null> {
+      const { email, password } = credentials;
+      return this.userService.login(email, password);
+    }
 }

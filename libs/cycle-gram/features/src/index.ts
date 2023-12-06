@@ -8,3 +8,5 @@ export * from './lib/bicycle/bicycle-list/bicycle-list.component';
 export * from './lib/bicycle/bicycle-detail/bicycle-detail.component';
 export * from './lib/bicycle/bicycle-edit/bicycle-edit.component';
 export * from './lib/bicycle/bicycle-delete/bicycle-delete.component';
+export * from './lib/user/user-login/user-login.component';
+export * from './lib/user/user.service';

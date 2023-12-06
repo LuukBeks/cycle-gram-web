@@ -5,6 +5,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { ApiResponse, IBicycle } from '@cycle-gram-web-main/shared/api';
 import { Injectable } from '@angular/core';
 import { environment } from '@cycle-gram-web/shared/util-env';

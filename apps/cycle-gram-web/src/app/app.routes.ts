@@ -10,6 +10,7 @@ import {
   BicycleDetailComponent,
   BicycleEditComponent,
   BicycleDeleteComponent,
+  LoginComponent,
 } from '@cycle-gram-web-main/cycle-gram/features';
 
 export const appRoutes: Route[] = [
@@ -67,6 +68,17 @@ export const appRoutes: Route[] = [
     path: 'bicycle/create', 
     pathMatch: 'full',
     component: BicycleEditComponent 
+  },
+  {
+    path: 'login',
+    pathMatch: 'full',
+    component: LoginComponent,
+  },
+  {
+    path: 'register',
+    pathMatch: 'full',
+    component: UserEditComponent,
+    data: { createMode: true },
   },
 ];
 

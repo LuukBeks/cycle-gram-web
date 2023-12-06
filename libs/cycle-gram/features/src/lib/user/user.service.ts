@@ -1,24 +1,20 @@
-import { Observable, throwError } from 'rxjs';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-} from '@angular/common/http';
-import { map, catchError, tap } from 'rxjs/operators';
-import { ApiResponse, IUser } from '@cycle-gram-web-main/shared/api';
+// user.service.ts
 import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { catchError, map, tap } from 'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '@cycle-gram-web/shared/util-env';
-
-export const httpOptions = {
-  observe: 'body',
-  responseType: 'json',
-};
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { IUser, ApiResponse } from '@cycle-gram-web-main/shared/api';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  endpoint = `${environment.backendUrl}/user`;
+  private readonly endpoint = `${environment.backendUrl}/user`;
+  private readonly jwtHelper = new JwtHelperService();
+  private readonly tokenKey = 'auth_token'; // <-- Add this property
 
   constructor(private readonly http: HttpClient) {}
 
@@ -30,6 +26,7 @@ export class UserService {
         ...options,
         observe: 'body',
         responseType: 'json',
+        headers: this.createAuthHeaders(),
       })
       .pipe(
         map((response: any) => response.results as IUser[]),
@@ -45,6 +42,7 @@ export class UserService {
         ...options,
         observe: 'body',
         responseType: 'json',
+        headers: this.createAuthHeaders(),
       })
       .pipe(
         tap(console.log),
@@ -56,14 +54,12 @@ export class UserService {
   public create(user: IUser): Observable<IUser> {
     console.log(`create ${this.endpoint}`);
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-    };
-
     return this.http
-      .post<ApiResponse<IUser>>(this.endpoint, user, httpOptions)
+      .post<ApiResponse<IUser>>(this.endpoint, user, {
+        observe: 'body',
+        responseType: 'json',
+        headers: this.createAuthHeaders(),
+      })
       .pipe(
         tap(console.log),
         map((response: any) => response.results as IUser),
@@ -73,14 +69,75 @@ export class UserService {
 
   public update(user: IUser): Observable<IUser> {
     return this.http
-      .put<ApiResponse<IUser>>(`${this.endpoint}/${user.id}`, user)
+      .put<ApiResponse<IUser>>(`${this.endpoint}/${user.id}`, user, {
+        observe: 'body',
+        responseType: 'json',
+        headers: this.createAuthHeaders(),
+      })
       .pipe(tap(console.log), catchError(this.handleError));
   }
 
   public delete(user: IUser): Observable<IUser> {
     return this.http
-      .delete<ApiResponse<IUser>>(`${this.endpoint}/${user.id}`)
+      .delete<ApiResponse<IUser>>(`${this.endpoint}/${user.id}`, {
+        observe: 'body',
+        responseType: 'json',
+        headers: this.createAuthHeaders(),
+      })
       .pipe(tap(console.log), catchError(this.handleError));
+  }
+
+  public login(credentials: { email: string; password: string }): Observable<IUser | null> {
+    const endpoint = `${this.endpoint}/login`;
+    
+    return this.http.post<{ results: IUser }>(endpoint, credentials).pipe(
+      map((response) => {
+        if (response && response.results && response.results.token) {
+          localStorage.setItem(this.tokenKey, response.results.token);
+          return response.results;
+        } else {
+          console.error('Invalid response structure:', response);
+          return null;
+        }
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  public logout(): void {
+    localStorage.removeItem(this.tokenKey);
+  }
+
+  public isAuthenticated(): boolean {
+    const token = this.getAuthToken();
+  
+    if (!token) {
+      // Token is missing
+      return false;
+    }
+  
+    try {
+      // Attempt to decode and check expiration
+      return !this.jwtHelper.isTokenExpired(token);
+    } catch (error) {
+      // Token is invalid
+      console.error('Error decoding token:', error);
+      return false;
+    }
+  }
+
+  private getAuthToken(): string | null {
+    const token = localStorage.getItem(this.tokenKey);
+    console.log('Token:', token);
+    return token;
+  }
+
+  private createAuthHeaders(): HttpHeaders {
+    const token = this.getAuthToken();
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
   }
 
   private handleError(error: HttpErrorResponse): Observable<any> {

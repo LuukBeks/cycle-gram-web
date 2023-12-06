@@ -1,9 +1,19 @@
+// header.component.ts
 import { Component } from '@angular/core';
-
+import { UserService } from '@cycle-gram-web-main/cycle-gram/features';
 
 @Component({
-    selector: 'cycle-gram-web-main-header', // Updated selector
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.css'], // Updated style URL
+  selector: 'cycle-gram-web-main-header',
+  templateUrl: './header.component.html',
 })
-export class HeaderComponent{}
+export class HeaderComponent {
+  constructor(private authService: UserService) {}
+
+  isLoggedIn(): boolean {
+    return this.authService.isAuthenticated();
+  }
+
+  logout(): void {
+    this.authService.logout();
+  }
+}

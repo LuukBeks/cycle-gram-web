@@ -11,6 +11,7 @@ export interface IUser { // Updated interface name
     password: string;
     image: string;
     sort: UserSort; // Updated sort property
+    token?: string;
 }
 
 export type ICreateUser = Pick<

@@ -5,6 +5,8 @@ import { User as UserModel, UserDocument } from './user/user.schema';
 import { IUser } from '@cycle-gram-web-main/shared/api';
 import { Logger } from '@nestjs/common';
 import { CreateUserDto, UpdateUserDto } from '@cycle-gram-web-main/backend/dto';
+import { randomBytes } from 'crypto';
+import { sign } from 'jsonwebtoken';
 
 @Injectable()
 export class UserService {
@@ -48,5 +50,30 @@ export class UserService {
 
   async deleteUser(id: string): Promise<void> {
     this.userModel.findOneAndDelete({ id }).exec();
+  }
+
+  async login(email: string, password: string): Promise<IUser | null> {
+    const foundUser = await this.userModel.findOne({ email }).exec();
+
+    if (!foundUser) {
+      throw new NotFoundException(`User with email ${email} not found!`);
+    }
+
+    if (foundUser.password !== password) {
+      throw new NotFoundException(
+        `Incorrect password for user with email ${email}!`
+      );
+    }
+
+    // Generate a JWT token
+    const secretKey = randomBytes(32).toString('hex');
+    const userId = foundUser._id.toString();
+    const token = sign({ userId }, secretKey, {
+      expiresIn: '1h',
+    });
+
+    // Add the token to the response
+    const response = { ...foundUser.toJSON(), token };
+    return response;
   }
 }
