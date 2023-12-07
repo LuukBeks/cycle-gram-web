@@ -48,16 +48,15 @@ export class UserEditComponent implements OnInit {
           if (this.id) {
             this.userService.read(this.id).subscribe((observable) => {
               this.user = observable;
-
-              console.log('User:', this.user);
-              console.log('Logged-in user ID:', this.loggedInUserId);
               // Check if the logged-in user is the same as the user being edited
               if (this.loggedInUserId !== this.user.id) {
                 // Redirect to an unauthorized access page or display an error message
                 this.router.navigate(['/users']);
               }
             });
-          }
+          } else {
+            this.router.navigate(['/users']);
+          }        
         });
       }
     });
