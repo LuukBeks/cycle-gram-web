@@ -67,8 +67,8 @@ export class UserService {
 
     // Generate a JWT token
     const secretKey = randomBytes(32).toString('hex');
-    const userId = foundUser._id.toString();
-    const token = sign({ userId }, secretKey, {
+    const userId = foundUser.id.toString();
+    const token = sign({ sub: userId }, secretKey, {
       expiresIn: '1h',
     });
 

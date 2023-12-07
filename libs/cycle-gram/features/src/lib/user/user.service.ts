@@ -128,7 +128,6 @@ export class UserService {
 
   private getAuthToken(): string | null {
     const token = localStorage.getItem(this.tokenKey);
-    console.log('Token:', token);
     return token;
   }
 
@@ -138,6 +137,23 @@ export class UserService {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     });
+  }
+
+  public getLoggedInUserId(): string | null {
+    const token = this.getAuthToken();
+    if (!token) {
+      return null;
+    }
+  
+    try {
+      const decodedToken: any = this.jwtHelper.decodeToken(token);
+      console.log('Decoded token:', decodedToken.sub);
+
+      return decodedToken.sub; // Use the correct field name
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
   }
 
   private handleError(error: HttpErrorResponse): Observable<any> {

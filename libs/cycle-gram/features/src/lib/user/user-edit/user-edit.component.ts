@@ -22,6 +22,7 @@ export class UserEditComponent implements OnInit {
     sort: UserSort.Other,
   };
   id: string | null = null;
+  loggedInUserId: string | null = null; // Add a property to store the logged-in user ID
 
   constructor(
     private userService: UserService,
@@ -31,11 +32,8 @@ export class UserEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Check if the user is authenticated before allowing access
-    if (!this.userService.isAuthenticated()) {
-      // Redirect to the login page or handle unauthorized access
-      this.router.navigate(['/login']);
-    }
+    // Fetch the logged-in user details
+    this.loggedInUserId = this.userService.getLoggedInUserId();
 
     this.route.data.subscribe((data) => {
       const createMode = data['createMode'];
@@ -50,6 +48,14 @@ export class UserEditComponent implements OnInit {
           if (this.id) {
             this.userService.read(this.id).subscribe((observable) => {
               this.user = observable;
+
+              console.log('User:', this.user);
+              console.log('Logged-in user ID:', this.loggedInUserId);
+              // Check if the logged-in user is the same as the user being edited
+              if (this.loggedInUserId !== this.user.id) {
+                // Redirect to an unauthorized access page or display an error message
+                this.router.navigate(['/users']);
+              }
             });
           }
         });
@@ -67,15 +73,14 @@ export class UserEditComponent implements OnInit {
     this.userService.create(this.user).subscribe(
       (createdUser) => {
         console.log('User created successfully:', createdUser);
-        this.router.navigate(['../..'], {relativeTo: this.route});
-
+        this.router.navigate(['../..'], { relativeTo: this.route });
       },
       (error) => {
         console.error('Error creating user:', error);
       }
     );
-  } 
-  
+  }
+
   goBack(): void {
     this.router.navigate(['/users']);
   }
