@@ -1,9 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Schema as MongooseSchema } from 'mongoose';
+import mongoose,{ Document, Schema as MongooseSchema } from 'mongoose';
 import { IUser } from '@cycle-gram-web-main/shared/api';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { UserSort } from 'libs/cycle-gram/features/src/lib/user/user.model';
 import { IsMongoId } from 'class-validator';
+import { Bicycle } from '../bicycle/bicycle.shema';
 
 export type UserDocument = User & Document;
 
@@ -38,6 +39,9 @@ export class User implements IUser {
     
     @Prop({ required: true, type: String, enum: UserSort})  // Specify the enum type here
     sort!: UserSort.Admin;
+
+    @Prop({ type: Object, ref: 'Bicycle', default: [] })
+    bicycles?: Bicycle[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

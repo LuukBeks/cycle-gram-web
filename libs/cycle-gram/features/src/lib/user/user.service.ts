@@ -86,7 +86,7 @@ export class UserService {
       })
       .pipe(tap(console.log), catchError(this.handleError));
   }
-
+  
   public login(credentials: { email: string; password: string }): Observable<IUser | null> {
     const endpoint = `${this.endpoint}/login`;
     

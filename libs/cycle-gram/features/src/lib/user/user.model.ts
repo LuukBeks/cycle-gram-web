@@ -1,3 +1,5 @@
+import { Bicycle } from "../bicycle/bicycle.model";
+
 export enum UserSort {
     Admin = 'Admin',
     Guest = 'Guest',
@@ -13,6 +15,7 @@ export class User {
     password: string;
     image: string;
     sort: UserSort;
+    bicycles?: Bicycle[];
 
     constructor(user: User) {
         this.id = user.id;
@@ -23,5 +26,6 @@ export class User {
         this.password = user.password;
         this.image = user.image;
         this.sort = user.sort;
+        this.bicycles = user.bicycles;
     }
 }

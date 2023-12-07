@@ -1,5 +1,6 @@
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { UserSort } from 'libs/cycle-gram/features/src/lib/user/user.model';
+import { IBicycle } from './bicycle.interface';
 import { Id } from './id.type';
 
 export interface IUser { // Updated interface name
@@ -12,6 +13,7 @@ export interface IUser { // Updated interface name
     image: string;
     sort: UserSort; // Updated sort property
     token?: string;
+    bicycles?: IBicycle[];
 }
 
 export type ICreateUser = Pick<
