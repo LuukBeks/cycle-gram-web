@@ -40,12 +40,13 @@ export class UserEditComponent implements OnInit {
 
       if (createMode) {
         // Handle create mode
-        // You might want to initialize some properties differently for new users
+
       } else {
         // Handle edit mode
         this.route.paramMap.subscribe((params) => {
           this.id = params.get('id');
           if (this.id) {
+            console.log('Editing user:', this.id);
             this.userService.read(this.id).subscribe((observable) => {
               this.user = observable;
               // Check if the logged-in user is the same as the user being edited
@@ -54,9 +55,7 @@ export class UserEditComponent implements OnInit {
                 this.router.navigate(['/users']);
               }
             });
-          } else {
-            this.router.navigate(['/users']);
-          }        
+          }   
         });
       }
     });
@@ -69,6 +68,7 @@ export class UserEditComponent implements OnInit {
   }
 
   createUser(): void {
+    console.log('Creating user:', this.user);
     this.userService.create(this.user).subscribe(
       (createdUser) => {
         console.log('User created successfully:', createdUser);
