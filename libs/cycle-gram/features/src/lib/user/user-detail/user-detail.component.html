@@ -10,7 +10,7 @@
         <p class="text-gray-600">{{ (user$ | async)?.email }}</p>
       </div>
     </div>
-    
+
     <div class="mb-2">
       <strong>Date of Birth:</strong> {{ (user$ | async)?.dob | date:'mediumDate' }}
     </div>
@@ -20,7 +20,16 @@
     <div class="mb-2">
       <strong>User Type:</strong> {{ (user$ | async)?.sort }}
     </div>
-    
+
+    <div class="mb-4">
+      <h3 class="text-xl font-bold">Bicycles:</h3>
+      <ul>
+        <li *ngFor="let bicycle of (user$ | async)?.bicycles">
+          {{ bicycle.bicycleName }} - {{ bicycle.Brand }} - {{ bicycle.sort }}
+        </li>
+      </ul>
+    </div>
+
     <button routerLink="/users/{{ userId }}/edit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue">
       Edit User
     </button>
