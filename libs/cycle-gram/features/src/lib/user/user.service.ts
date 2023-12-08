@@ -7,6 +7,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '@cycle-gram-web/shared/util-env';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { IUser, ApiResponse } from '@cycle-gram-web-main/shared/api';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class UserService {
   private readonly jwtHelper = new JwtHelperService();
   private readonly tokenKey = 'auth_token'; // <-- Add this property
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient, private router: Router) {}
 
   public list(options?: any): Observable<IUser[] | null> {
     console.log(`list ${this.endpoint}`);
@@ -105,7 +106,9 @@ export class UserService {
   }
 
   public logout(): void {
+    this.router.navigate(['/']);
     localStorage.removeItem(this.tokenKey);
+
   }
 
   public isAuthenticated(): boolean {
