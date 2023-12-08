@@ -24,7 +24,7 @@ export class LoginComponent {
         console.log('Login successful', response);
   
         // Navigate to the home page
-        this.router.navigate(['/']);
+        this.router.navigate(['/users']);
       },
       (error) => {
         console.error('Login failed', error);
