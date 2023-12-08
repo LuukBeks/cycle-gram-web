@@ -78,7 +78,7 @@ export const appRoutes: Route[] = [
     component: BicycleEditComponent 
   },
   { //auth
-    path: 'login',
+    path: '',
     pathMatch: 'full',
     component: LoginComponent,
   },

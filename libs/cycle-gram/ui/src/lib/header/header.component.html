@@ -5,7 +5,6 @@
     <div class="hidden sm:ml-6 sm:block">
       <div class="flex space-x-4">
         <!-- Existing links -->
-        <a routerLink="/" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium">Home</a>
         <a routerLink="/users" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Users</a>
         <a routerLink="/bicycles" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Bicycles</a>
         <a routerLink="/cycleroute" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Cycle Route</a>
@@ -14,7 +13,7 @@
         <!-- Dynamic login, register, and logout buttons -->
         <ng-container *ngIf="!isLoggedIn(); else loggedInButtons">
           <a routerLink="/user/create" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Register</a>
-          <a routerLink="/login" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Login</a>
+          <a routerLink="/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Login</a>
         </ng-container>
         <ng-template #loggedInButtons>
           <button (click)="logout()" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Logout</button>

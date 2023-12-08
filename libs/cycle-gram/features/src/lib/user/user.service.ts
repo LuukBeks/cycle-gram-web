@@ -89,7 +89,7 @@ export class UserService {
   }
   
   public login(credentials: { email: string; password: string }): Observable<IUser | null> {
-    const endpoint = `${this.endpoint}/login`;
+    const endpoint = `${this.endpoint}/`;
     
     return this.http.post<{ results: IUser }>(endpoint, credentials).pipe(
       map((response) => {

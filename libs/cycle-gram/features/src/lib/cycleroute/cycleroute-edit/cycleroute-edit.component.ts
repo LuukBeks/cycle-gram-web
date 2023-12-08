@@ -36,7 +36,7 @@ export class CycleRouteEditComponent {
     // Check if user is logged in
     const loggedInUserId = this.userService.getLoggedInUserId();
     if (!loggedInUserId) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/']);
     }
 
     this.route.paramMap.subscribe((params) => {
