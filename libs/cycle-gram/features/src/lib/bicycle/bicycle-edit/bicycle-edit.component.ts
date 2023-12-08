@@ -76,7 +76,7 @@ export class BicycleEditComponent {
                 this.userService.update(user).subscribe(
                   () => {
                     console.log('User updated successfully with the new bicycle');
-                    this.router.navigate(['../..'], { relativeTo: this.route });
+                    this.router.navigate(['/bicycles'], { relativeTo: this.route });
                   },
                   (updateError) => {
                     console.error('Error updating user:', updateError);
