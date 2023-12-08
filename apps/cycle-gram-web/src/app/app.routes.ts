@@ -11,6 +11,10 @@ import {
   BicycleEditComponent,
   BicycleDeleteComponent,
   LoginComponent,
+  CycleRouteDeleteComponent,
+  CycleRouteDetailComponent,
+  CycleRouteEditComponent,
+  CycleRouteListComponent,
 } from '@cycle-gram-web-main/cycle-gram/features';
 
 export const appRoutes: Route[] = [
@@ -79,6 +83,31 @@ export const appRoutes: Route[] = [
     pathMatch: 'full',
     component: UserEditComponent,
     data: { createMode: true },
+  },
+  {
+    path: 'cycleroute',
+    pathMatch: 'full',
+    component: CycleRouteListComponent,
+  },
+  {
+    path: 'cycleroute/create',
+    pathMatch: 'full',
+    component: CycleRouteEditComponent,
+  },
+  {
+    path: 'cycleroute/:id',
+    pathMatch: 'full',
+    component: CycleRouteDetailComponent,
+  },
+  {
+    path: 'cycleroute/:id/edit',
+    pathMatch: 'full',
+    component: CycleRouteEditComponent,
+  },
+  {
+    path: 'cycleroute/:id/delete',
+    pathMatch: 'full',
+    component: CycleRouteDeleteComponent,
   },
 ];
 

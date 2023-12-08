@@ -1,0 +1,25 @@
+<a routerLink="/cycleroute/create" class="bg-blue-500 text-white px-4 py-2 inline-block mb-4">Add CycleRoute</a>
+
+<div class="container mx-auto mt-8 grid grid-cols-3 gap-4">
+    <h1 class="col-span-3 text-3xl font-bold mb-4">CycleRoute List</h1>
+  
+    <div *ngFor="let cycleroute of cycleroutes" class="col-span-1 p-4 border rounded-md cursor-pointer hover:bg-gray-100 transition-transform transform">
+      <a routerLink="{{ cycleroute.id }}" class="block relative">
+        <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-md">
+          <img [src]="cycleroute.image" alt="CycleRoute Image" class="object-cover w-full h-full rounded-md" />
+        </div>
+        <div class="mt-4">
+          <h2 class="text-xl font-bold mb-2">{{ cycleroute.routeName }}</h2>
+          <p>Distance: {{ cycleroute.distance }}</p>
+          <p>GPX: {{ cycleroute.gpx }}</p>
+          <p>Start adres: {{ cycleroute.startAdres }}</p>
+          <p>Sort: {{ cycleroute.sort }}</p>
+          <img [src]="cycleroute.image" alt="CycleRoute Profile" class="w-full h-auto md:w-64 rounded-md shadow-md" />
+        </div>
+        <div class="flex space-x-4 mt-4">
+          <a routerLink="{{ cycleroute.id }}" class="text-blue-500">Details</a>
+          <a routerLink="/cycleroute/{{ cycleroute?.id }}/delete" class="text-red-500">Delete</a>
+        </div>
+      </a>
+    </div>
+  </div>

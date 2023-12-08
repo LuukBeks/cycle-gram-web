@@ -10,3 +10,8 @@ export * from './lib/bicycle/bicycle-edit/bicycle-edit.component';
 export * from './lib/bicycle/bicycle-delete/bicycle-delete.component';
 export * from './lib/user/user-login/user-login.component';
 export * from './lib/user/user.service';
+export * from './lib/cycleroute/cycleroute-delete/cycleroute-delete.component';
+export * from './lib/cycleroute/cycleroute-edit/cycleroute-edit.component';
+export * from './lib/cycleroute/cycleroute-detail/cycleroute-detail.component';
+export * from './lib/cycleroute/cycleroute-list/cycleroute-list.component';
+export * from './lib/cycleroute/cycleroute.service';

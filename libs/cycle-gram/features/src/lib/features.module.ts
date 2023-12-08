@@ -15,12 +15,46 @@ import { BicycleEditComponent } from './bicycle/bicycle-edit/bicycle-edit.compon
 import { BicycleDeleteComponent } from './bicycle/bicycle-delete/bicycle-delete.component';
 import { BicycleService } from './bicycle/bicycle.service';
 import { LoginComponent } from './user/user-login/user-login.component';
-
+import { CycleRouteListComponent } from './cycleroute/cycleroute-list/cycleroute-list.component';
+import { CycleRouteDetailComponent } from './cycleroute/cycleroute-detail/cycleroute-detail.component';
+import { CycleRouteEditComponent } from './cycleroute/cycleroute-edit/cycleroute-edit.component';
+import { CycleRouteDeleteComponent } from './cycleroute/cycleroute-delete/cycleroute-delete.component';
+import { CycleRouteService } from './cycleroute/cycleroute.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, RouterModule, FormsModule],
-  declarations: [UserListComponent, UserDetailComponent, AboutComponent, UserEditComponent, UserDeleteComponent, BicycleListComponent, BicycleDetailComponent, BicycleEditComponent, LoginComponent, BicycleDeleteComponent],
-  providers: [UserService, BicycleService],
-  exports: [UserListComponent, UserDetailComponent, AboutComponent, UserEditComponent, UserDeleteComponent, BicycleListComponent, BicycleDetailComponent, BicycleEditComponent, LoginComponent ,BicycleDeleteComponent]
+  declarations: [
+    UserListComponent,
+    UserDetailComponent,
+    AboutComponent,
+    UserEditComponent,
+    UserDeleteComponent,
+    BicycleListComponent,
+    BicycleDetailComponent,
+    BicycleEditComponent,
+    LoginComponent,
+    BicycleDeleteComponent,
+    CycleRouteListComponent,
+    CycleRouteDetailComponent,
+    CycleRouteEditComponent,
+    CycleRouteDeleteComponent,
+  ],
+  providers: [UserService, BicycleService, CycleRouteService],
+  exports: [
+    UserListComponent,
+    UserDetailComponent,
+    AboutComponent,
+    UserEditComponent,
+    UserDeleteComponent,
+    BicycleListComponent,
+    BicycleDetailComponent,
+    BicycleEditComponent,
+    LoginComponent,
+    BicycleDeleteComponent,
+    CycleRouteListComponent,
+    CycleRouteDetailComponent,
+    CycleRouteEditComponent,
+    CycleRouteDeleteComponent,
+  ],
 })
 export class FeaturesModule {}

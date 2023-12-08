@@ -3,10 +3,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { environment } from '@cycle-gram-web/shared/util-env';
-import { BackendFeaturesUserModule, BackendFeaturesBicycleModule } from '@cycle-gram-web-main/backend/features';
+import { BackendFeaturesUserModule, BackendFeaturesBicycleModule, BackendFeaturesCycleRouteModule } from '@cycle-gram-web-main/backend/features';
 
 @Module({
-  imports: [BackendFeaturesUserModule, BackendFeaturesBicycleModule, MongooseModule.forRoot(environment.MONGO_DB_CONNECTION_STRING, {
+  imports: [BackendFeaturesUserModule, BackendFeaturesBicycleModule, BackendFeaturesCycleRouteModule, MongooseModule.forRoot(environment.MONGO_DB_CONNECTION_STRING, {
     dbName: 'cycle-gram-web',
     connectionFactory: (connection) => {
       return connection;

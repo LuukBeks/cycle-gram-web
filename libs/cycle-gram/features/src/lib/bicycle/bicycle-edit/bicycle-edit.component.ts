@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { BicycleService } from '../bicycle.service';
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { IBicycle, IUser } from '@cycle-gram-web-main/shared/api';
 import { BicycleType } from '../bicycle.model';
 import { UserService } from '../../user/user.service';
