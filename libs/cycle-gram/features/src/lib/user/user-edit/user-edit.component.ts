@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { UserService } from '../user.service';
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { IUser } from '@cycle-gram-web-main/shared/api';
 import { UserSort } from '../user.model';
 

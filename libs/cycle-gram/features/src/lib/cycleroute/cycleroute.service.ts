@@ -9,6 +9,7 @@ import { map, catchError, tap } from 'rxjs/operators';
 import { ApiResponse, ICycleRoute } from '@cycle-gram-web-main/shared/api';
 import { Injectable } from '@angular/core';
 import { environment } from '@cycle-gram-web/shared/util-env';
+import { CycleRoute } from './cycleroute.model';
 
 export const httpOptions = {
   observe: 'body',
@@ -39,6 +40,21 @@ export class CycleRouteService {
       );
   }
 
+  public readAll(options?: any): Observable<CycleRoute[]> {
+    console.log(`readAll ${this.endpoint}`);
+    return this.http
+      .get<ApiResponse<CycleRoute[]>>(`${this.endpoint}`, {
+        ...options,
+        observe: 'body',
+        responseType: 'json',
+      })
+      .pipe(
+        tap(console.log),
+        map((response: any) => response.results as CycleRoute[]),
+        catchError(this.handleError)
+      );
+  }
+  
   public read(id: string | null, options?: any): Observable<ICycleRoute> {
     console.log(`read ${this.endpoint}/${id}`);
     return this.http

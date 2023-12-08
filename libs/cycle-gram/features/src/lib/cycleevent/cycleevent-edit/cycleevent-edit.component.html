@@ -1,0 +1,83 @@
+<!-- Create CycleEvent Form -->
+<ng-container *ngIf="!id; else editMode">
+    <form class="max-w-md mx-auto my-8" #cycleeventEditForm="ngForm" (ngSubmit)="createCycleEvent()">
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="date">Date</label>
+            <input type="text" id="date" name="date" [(ngModel)]="cycleevent.date" class="w-full px-3 py-2 border rounded-md" required />
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">Title</label>
+            <input type="text" id="title" name="title" [(ngModel)]="cycleevent.title" class="w-full px-3 py-2 border rounded-md" required />
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="description">Description</label>
+            <textarea id="description" name="description" [(ngModel)]="cycleevent.description" class="w-full px-3 py-2 border rounded-md" required></textarea>
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="location">Location</label>
+            <input type="text" id="location" name="location" [(ngModel)]="cycleevent.location" class="w-full px-3 py-2 border rounded-md" required />
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="maxParticipants">Max Participants</label>
+            <input type="number" id="maxParticipants" name="maxParticipants" [(ngModel)]="cycleevent.maxParticipants" class="w-full px-3 py-2 border rounded-md" required />
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="route">Select Route</label>
+            <select id="route" name="route" [(ngModel)]="cycleevent.routes" class="w-full px-3 py-2 border rounded-md" required>
+                <option *ngFor="let cycleRoute of cycleRoutes" [value]="cycleRoute.id">{{ cycleRoute.routeName }}</option>
+            </select>
+        </div>
+
+        <div class="flex justify-between">
+            <button (click)="goBack()" class="bg-gray-500 text-white px-4 py-2 rounded-md">Back</button>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Create CycleEvent</button>
+        </div>
+    </form>
+</ng-container>
+
+<!-- Update CycleEvent Form -->
+<ng-template #editMode>
+    <form class="max-w-md mx-auto my-8" #cycleeventEditForm="ngForm" (ngSubmit)="editCycleEvent()">
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="date">Date</label>
+            <input type="text" id="date" name="date" [(ngModel)]="cycleevent.date" class="w-full px-3 py-2 border rounded-md" required />
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">Title</label>
+            <input type="text" id="title" name="title" [(ngModel)]="cycleevent.title" class="w-full px-3 py-2 border rounded-md" required />
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="description">Description</label>
+            <textarea id="description" name="description" [(ngModel)]="cycleevent.description" class="w-full px-3 py-2 border rounded-md" required></textarea>
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="location">Location</label>
+            <input type="text" id="location" name="location" [(ngModel)]="cycleevent.location" class="w-full px-3 py-2 border rounded-md" required />
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="maxParticipants">Max Participants</label>
+            <input type="number" id="maxParticipants" name="maxParticipants" [(ngModel)]="cycleevent.maxParticipants" class="w-full px-3 py-2 border rounded-md" required />
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="route">Select Route</label>
+            <select id="route" name="route" [(ngModel)]="cycleevent.routes" class="w-full px-3 py-2 border rounded-md" required>
+                <option *ngFor="let cycleRoute of cycleRoutes" [value]="cycleRoute.id">{{ cycleRoute.routeName }}</option>
+            </select>
+        </div>
+
+        <div class="flex justify-between">
+            <button (click)="goBack()" class="bg-gray-500 text-white px-4 py-2 rounded-md">Back</button>
+            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md">Edit CycleEvent</button>
+        </div>
+    </form>
+</ng-template>

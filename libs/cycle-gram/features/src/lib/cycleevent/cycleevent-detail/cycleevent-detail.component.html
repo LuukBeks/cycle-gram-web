@@ -1,0 +1,31 @@
+<div class="container mx-auto mt-8 p-8 bg-white rounded-md shadow-md">
+  <ng-container *ngIf="(cycleevent$ | async) as cycleevent; else loading">
+    <div class="flex flex-col md:flex-row items-center">
+      <div class="mt-4 md:mt-0">
+        <h1 class="text-3xl font-bold">{{ cycleevent.title }}</h1>
+        <div class="mt-4">
+          <strong>Date:</strong> {{ cycleevent.date }}
+        </div>
+        <div class="mt-4">
+          <strong>Title:</strong> {{ cycleevent.title }}
+        </div>
+        <div class="mt-4">
+          <strong>Description:</strong> {{ cycleevent.description }}
+        </div>
+        <div class="mt-4">
+          <strong>Location:</strong> {{ cycleevent.location }}
+        </div>
+        <div class="mt-4">
+          <strong>Max Participants:</strong> {{ cycleevent.maxParticipants }}
+        </div>
+        <button routerLink="/cycleevent/{{ cycleeventId }}/edit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue">
+          Edit CycleEvent
+        </button>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <p class="text-gray-800">Loading cycleevent details...</p>
+  </ng-template>
+</div>

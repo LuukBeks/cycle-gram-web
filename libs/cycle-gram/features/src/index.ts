@@ -14,4 +14,7 @@ export * from './lib/cycleroute/cycleroute-delete/cycleroute-delete.component';
 export * from './lib/cycleroute/cycleroute-edit/cycleroute-edit.component';
 export * from './lib/cycleroute/cycleroute-detail/cycleroute-detail.component';
 export * from './lib/cycleroute/cycleroute-list/cycleroute-list.component';
-export * from './lib/cycleroute/cycleroute.service';
+export * from './lib/cycleevent/cycleevent-delete/cycleevent-delete.component';
+export * from './lib/cycleevent/cycleevent-edit/cycleevent-edit.component';
+export * from './lib/cycleevent/cycleevent-detail/cycleevent-detail.component';
+export * from './lib/cycleevent/cycleevent-list/cycleevent-list.component';

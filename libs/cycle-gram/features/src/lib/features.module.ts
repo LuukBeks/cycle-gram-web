@@ -20,6 +20,12 @@ import { CycleRouteDetailComponent } from './cycleroute/cycleroute-detail/cycler
 import { CycleRouteEditComponent } from './cycleroute/cycleroute-edit/cycleroute-edit.component';
 import { CycleRouteDeleteComponent } from './cycleroute/cycleroute-delete/cycleroute-delete.component';
 import { CycleRouteService } from './cycleroute/cycleroute.service';
+import { CycleEventDeleteComponent } from './cycleevent/cycleevent-delete/cycleevent-delete.component';
+import { CycleEventListComponent } from './cycleevent/cycleevent-list/cycleevent-list.component';
+import { CycleEventDetailComponent } from './cycleevent/cycleevent-detail/cycleevent-detail.component';
+import { CycleEventEditComponent } from './cycleevent/cycleevent-edit/cycleevent-edit.component';
+import { CycleEventService } from './cycleevent/cycleevent.service';
+
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, RouterModule, FormsModule],
@@ -38,8 +44,12 @@ import { CycleRouteService } from './cycleroute/cycleroute.service';
     CycleRouteDetailComponent,
     CycleRouteEditComponent,
     CycleRouteDeleteComponent,
+    CycleEventListComponent,
+    CycleEventDetailComponent,
+    CycleEventEditComponent,
+    CycleEventDeleteComponent,
   ],
-  providers: [UserService, BicycleService, CycleRouteService],
+  providers: [UserService, BicycleService, CycleRouteService, CycleEventService],
   exports: [
     UserListComponent,
     UserDetailComponent,
@@ -55,6 +65,10 @@ import { CycleRouteService } from './cycleroute/cycleroute.service';
     CycleRouteDetailComponent,
     CycleRouteEditComponent,
     CycleRouteDeleteComponent,
+    CycleEventListComponent,
+    CycleEventDetailComponent,
+    CycleEventEditComponent,
+    CycleEventDeleteComponent,
   ],
 })
 export class FeaturesModule {}

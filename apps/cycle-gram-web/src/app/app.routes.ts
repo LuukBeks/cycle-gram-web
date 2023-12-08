@@ -15,6 +15,10 @@ import {
   CycleRouteDetailComponent,
   CycleRouteEditComponent,
   CycleRouteListComponent,
+  CycleEventListComponent,
+  CycleEventDetailComponent,
+  CycleEventEditComponent,
+  CycleEventDeleteComponent,
 } from '@cycle-gram-web-main/cycle-gram/features';
 
 export const appRoutes: Route[] = [
@@ -78,12 +82,6 @@ export const appRoutes: Route[] = [
     pathMatch: 'full',
     component: LoginComponent,
   },
-  {
-    path: 'register',
-    pathMatch: 'full',
-    component: UserEditComponent,
-    data: { createMode: true },
-  },
   { //cycleroute
     path: 'cycleroute',
     pathMatch: 'full',
@@ -109,6 +107,37 @@ export const appRoutes: Route[] = [
     pathMatch: 'full',
     component: CycleRouteDeleteComponent,
   },
+  { //cycleevent
+    path: 'cycleevent',
+    pathMatch: 'full',
+    component: CycleEventListComponent,
+  },
+  {
+    path: 'cycleevent/create',
+    pathMatch: 'full',
+    component: CycleEventEditComponent,
+  },
+  {
+    path: 'cycleevent/:id/participate',
+    pathMatch: 'full',
+    component: CycleEventEditComponent,
+  },
+  {
+    path: 'cycleevent/:id',
+    pathMatch: 'full',
+    component: CycleEventDetailComponent,
+  },
+  {
+    path: 'cycleevent/:id/edit',
+    pathMatch: 'full',
+    component: CycleEventEditComponent,
+  },
+  {
+    path: 'cycleevent/:id/delete',
+    pathMatch: 'full',
+    component: CycleEventDeleteComponent,
+  },
+  
 ];
 
 @NgModule({
