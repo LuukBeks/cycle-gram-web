@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { BicycleService } from '../bicycle.service';
@@ -12,7 +12,7 @@ import { UserService } from '../../user/user.service';
   templateUrl: './bicycle-edit.component.html',
   styleUrls: ['./../bicycle-list/bicycle-list.component.css'],
 })
-export class BicycleEditComponent {
+export class BicycleEditComponent implements OnInit {
   bicycle: IBicycle = {
     id: '',
     bicycleName: '',
