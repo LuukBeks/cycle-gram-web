@@ -73,7 +73,7 @@ export const appRoutes: Route[] = [
     pathMatch: 'full',
     component: BicycleEditComponent 
   },
-  {
+  { //auth
     path: 'login',
     pathMatch: 'full',
     component: LoginComponent,
@@ -84,7 +84,7 @@ export const appRoutes: Route[] = [
     component: UserEditComponent,
     data: { createMode: true },
   },
-  {
+  { //cycleroute
     path: 'cycleroute',
     pathMatch: 'full',
     component: CycleRouteListComponent,
