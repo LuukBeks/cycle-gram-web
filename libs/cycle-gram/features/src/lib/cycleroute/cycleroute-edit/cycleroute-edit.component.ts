@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { CycleRouteService } from '../cycleroute.service';
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import { ICycleRoute } from '@cycle-gram-web-main/shared/api';
+import { ICycleRoute, IUser } from '@cycle-gram-web-main/shared/api';
 import { CycleRouteSort } from '../cycleroute.model';
 import { UserService } from '../../user/user.service';
 
@@ -57,18 +57,39 @@ export class CycleRouteEditComponent {
   }
 
   createCycleRoute(): void {
-    console.log('Creating cycleroute:', this.cycleroute);
-    this.cyclerouteService.create(this.cycleroute).subscribe(
-      (createdCycleRoute) => {
-        console.log('CycleRoute created successfully:', createdCycleRoute);
-        this.router.navigate(['../..'], { relativeTo: this.route });
-      },
-      (error) => {
-        console.error('Error creating CycleRoute:', error);
-      }
-    );
-  }
-  
+    const loggedInUserId = this.userService.getLoggedInUserId();
+    if (loggedInUserId) {
+      this.userService.read(loggedInUserId).subscribe(
+        (user: IUser) => {
+          if (user) {
+            user.cycleRoutes = user.cycleRoutes || [];
+            this.cyclerouteService.create(this.cycleroute).subscribe(
+              (createdCycleRoute) => {
+                console.log('CycleRoute created successfully:', createdCycleRoute);
+                user.cycleRoutes!.push(createdCycleRoute);
+
+                this.userService.update(user).subscribe(
+                  (updatedUser) => {
+                    console.log('User updated successfully:', updatedUser);
+                    this.router.navigate(['../..'], { relativeTo: this.route });
+                  },
+                  (error) => {
+                    console.error('Error updating user:', error);
+                  }
+                );
+              },
+              (error) => {
+                console.error('Error creating CycleRoute:', error);
+              }
+            );
+          }
+        },
+        (error) => {
+          console.error('Error reading user:', error);
+        }
+      );
+    }
+  }  
   goBack(): void {
     this.router.navigate(['/cycleroute']);
   }

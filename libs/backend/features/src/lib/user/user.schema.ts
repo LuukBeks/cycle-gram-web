@@ -5,6 +5,7 @@ import { IUser } from '@cycle-gram-web-main/shared/api';
 import { UserSort } from 'libs/cycle-gram/features/src/lib/user/user.model';
 import { IsMongoId } from 'class-validator';
 import { Bicycle } from '../bicycle/bicycle.shema';
+import { CycleRoute } from '../cycleroute/cycleroute.schema';
 
 export type UserDocument = User & Document;
 
@@ -42,6 +43,9 @@ export class User implements IUser {
 
     @Prop({ type: Object, ref: 'Bicycle', default: [] })
     bicycles?: Bicycle[];
+
+    @Prop({ type: Object, ref: 'CycleRoute', default: [] })
+    cycleRoutes?: CycleRoute[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
