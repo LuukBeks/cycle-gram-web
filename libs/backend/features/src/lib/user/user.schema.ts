@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose,{ Document, Schema as MongooseSchema } from 'mongoose';
+import { Document, Schema as MongooseSchema } from 'mongoose';
 import { IUser } from '@cycle-gram-web-main/shared/api';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { UserSort } from 'libs/cycle-gram/features/src/lib/user/user.model';

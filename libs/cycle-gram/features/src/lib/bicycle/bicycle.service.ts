@@ -9,6 +9,8 @@ import { map, catchError, tap } from 'rxjs/operators';
 import { ApiResponse, IBicycle } from '@cycle-gram-web-main/shared/api';
 import { Injectable } from '@angular/core';
 import { environment } from '@cycle-gram-web/shared/util-env';
+import { UserService } from '../user/user.service';
+
 
 export const httpOptions = {
   observe: 'body',
@@ -21,7 +23,7 @@ export const httpOptions = {
 export class BicycleService {
   endpoint = `${environment.backendUrl}/bicycle`;
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient, private userService: UserService) {}
 
   public list(options?: any): Observable<IBicycle[] | null> {
     console.log(`list ${this.endpoint}`);
@@ -82,6 +84,19 @@ export class BicycleService {
     return this.http
       .delete<ApiResponse<IBicycle>>(`${this.endpoint}/${bicycle.id}`)
       .pipe(tap(console.log), catchError(this.handleError));
+  }
+
+  public findUserByBicycleId(bicycleId: string): Observable<string | null> {
+    return this.userService.list().pipe(
+      map(users => {
+        if (users) {
+          const user = users.find(user => user.bicycles && user.bicycles.some(bicycle => bicycle.id === bicycleId));          
+          return user ? user.id : null;
+        }
+        return null;
+      }),
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: HttpErrorResponse): Observable<any> {

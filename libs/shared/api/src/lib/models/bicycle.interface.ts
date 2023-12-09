@@ -11,6 +11,7 @@ export interface IBicycle { // Updated interface name
     kleur: string;
     image: string;
     sort: BicycleType;
+    ownerId?: Id;
 }
 
 export type ICreateBicycle = Pick<

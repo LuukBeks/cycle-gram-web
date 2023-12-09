@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../user.service'; // Updated service import
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { IUser } from '@cycle-gram-web-main/shared/api'; // Updated interface import
 import { Subscription } from 'rxjs';
 
