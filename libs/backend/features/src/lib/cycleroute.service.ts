@@ -5,13 +5,15 @@ import { CycleRoute as CycleRouteModel, CycleRouteDocument } from './cycleroute/
 import { ICycleRoute } from '@cycle-gram-web-main/shared/api';
 import { Logger } from '@nestjs/common';
 import { CreateCycleRouteDto, UpdateCycleRouteDto } from '@cycle-gram-web-main/backend/dto';
+import { UserService } from './user.service'; // import UserService
 
 @Injectable()
 export class CycleRouteService {
   private readonly logger: Logger = new Logger(CycleRouteService.name);
 
   constructor(
-    @InjectModel(CycleRouteModel.name) private cyclerouteModel: Model<CycleRouteDocument>
+    @InjectModel(CycleRouteModel.name) private cyclerouteModel: Model<ICycleRoute>,
+    private userService: UserService, // inject UserService
   ) {}
   TAG = 'CycleRouteService';
 
@@ -47,6 +49,10 @@ export class CycleRouteService {
   }
 
   async deleteCycleRoute(id: string): Promise<void> {
-    this.cyclerouteModel.findOneAndDelete({ id }).exec();
+    // Delete the cycle route from the cycle route collection
+    await this.cyclerouteModel.findOneAndDelete({ id }).exec();
+  
+    // Delete the cycle route from the user's cycle routes array
+    await this.userService.deleteCycleroute(id);
   }
 }

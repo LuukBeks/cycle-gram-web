@@ -76,4 +76,29 @@ export class UserService {
     const response = { ...foundUser.toJSON(), token };
     return response;
   }
+
+  async deleteBicycle(bicycleId: string): Promise<IUser | null> {
+    const user = await this.userModel.findOne({ 'bicycles.id': bicycleId });
+    if (!user || !user.bicycles) {
+      return null;
+    }
+  
+    user.bicycles = user.bicycles.filter(bicycle => bicycle.id !== bicycleId);
+    await user.save();
+    console.log('user', user);
+  
+    return user;
+  }
+
+  async deleteCycleroute(cyclerouteId: string): Promise<UserDocument | null> {
+    const user = await this.userModel.findOne({ 'cycleRoutes.id': cyclerouteId });
+    if (!user || !user.cycleRoutes) {
+      return null;
+    }
+  
+    user.cycleRoutes = user.cycleRoutes.filter(cycleroute => cycleroute.id !== cyclerouteId);
+    await user.save();
+  
+    return user;
+  }
 }

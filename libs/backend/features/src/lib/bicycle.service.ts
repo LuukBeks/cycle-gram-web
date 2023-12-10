@@ -1,17 +1,17 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { Bicycle as BicycleModel, BicycleDocument } from './bicycle/bicycle.shema';
+import { Bicycle as BicycleModel, BicycleDocument, Bicycle } from './bicycle/bicycle.shema';
 import { IBicycle } from '@cycle-gram-web-main/shared/api';
 import { Logger } from '@nestjs/common';
 import { CreateBicycleDto, UpdateBicycleDto } from '@cycle-gram-web-main/backend/dto';
+import { UserService } from './user.service';
 
 @Injectable()
 export class BicycleService {
-  private readonly logger: Logger = new Logger(BicycleService.name);
-
   constructor(
-    @InjectModel(BicycleModel.name) private bicycleModel: Model<BicycleDocument>
+    @InjectModel(Bicycle.name) private bicycleModel: Model<IBicycle>,
+    private userService: UserService, // inject UserService
   ) {}
   TAG = 'BicycleService';
 
@@ -47,6 +47,7 @@ export class BicycleService {
   }
 
   async deleteBicycle(id: string): Promise<void> {
-    this.bicycleModel.findOneAndDelete({ id }).exec();
+    await this.bicycleModel.findOneAndDelete({ id }).exec();
+    await this.userService.deleteBicycle(id); // delete bicycle from user
   }
 }
