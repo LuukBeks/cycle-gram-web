@@ -19,7 +19,7 @@
         <div class="mt-2">
           <strong>Bicycle Type:</strong> {{ bicycle.sort }}
         </div>
-        <button routerLink="/bicycles/{{ bicycleId }}/edit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue">
+        <button *ngIf="canEdit" routerLink="/bicycles/{{ bicycleId }}/edit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue">
           Edit Bicycle
         </button>
       </div>

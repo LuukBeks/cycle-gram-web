@@ -18,7 +18,7 @@
         <div class="mt-4">
           <strong>Max Participants:</strong> {{ cycleevent.maxParticipants }}
         </div>
-        <button routerLink="/cycleevent/{{ cycleeventId }}/edit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue">
+        <button *ngIf="isOwner(cycleevent)" routerLink="/cycleevent/{{ cycleeventId }}/edit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue">
           Edit CycleEvent
         </button>
       </div>

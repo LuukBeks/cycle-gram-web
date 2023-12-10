@@ -1,41 +1,105 @@
-
 <div class="container mx-auto p-8">
-    <h1 class="text-4xl font-bold mb-4">Cycle-Gram</h1>
-  
-    <p class="mb-8">
-        Cycle-Gram is a web application where users can create accounts and explore activities shared by other users.
-        Users can add their bikes to their accounts, allowing others to view them for inspiration.
-        In addition to browsing bikes, users can create and share routes they have ridden.
-        The app also enables the creation of cycling events for users to join and ride together.
-        As users scroll through the app, they receive recommendations for participating in cycling events or solo rides.
-      </p>
-  
-    <h2 class="text-2xl font-bold mb-4">Features</h2>
-    <ul class="list-disc ml-6 mb-8">
-      <li>Account creation and login</li>
-      <li>Browsing and adding bikes</li>
-      <li>Creating and sharing routes</li>
-      <li>Organizing and joining cycling events</li>
-      <li>Personalized recommendations</li>
-    </ul>
-  
-    <h2 class="text-2xl font-bold mb-4">Bike Manufacturer Information</h2>
-    <p class="mb-8">
-      Each bike is associated with a manufacturer. Users can add manufacturers to their bikes by choosing from existing options.
-      Manufacturer details are then displayed alongside bike information.
-    </p>
-  
-    <h2 class="text-2xl font-bold mb-4">Project Goal</h2>
-    <p class="mb-8">
-      The goal of Cycle-Gram is to connect cycling enthusiasts, allowing them to share their passion for bikes and cycling adventures.
-    </p>
-  
-    <h2 class="text-2xl font-bold mb-4">About the ERD</h2>
-    <p class="mb-8">
-      Below is the ERD representing the data structure of Cycle-Gram.
-    </p>
-    <img *ngIf="imagePath" [src]="imagePath" alt="Cycle Gram ERD" class="mb-8 rounded-lg shadow-lg">
+  <h1 class="text-4xl font-bold mb-4">Cycle-Gram</h1>
 
-  
+  <!-- Casus -->
+  <div class="mb-8">
+      <h2 class="text-2xl font-bold mb-2">Casus: Wat is Cycle-Gram?</h2>
+      <p>
+          Cycle-Gram is een platform voor fanatieke fietsers. Gebruikers kunnen een account aanmaken, hun fiets(en) toevoegen, routes delen en deelnemen aan evenementen. Het biedt een ruimte waar fietsers elkaar kunnen inspireren en samen kunnen rijden.
+      </p>
   </div>
+
+  <!-- Gebruikersverhalen -->
+  <h2 class="text-2xl font-bold mb-4">User Stories</h2>
   
+  <table class="w-full mb-8">
+      <thead>
+          <tr class="border-b">
+              <th class="text-left font-bold py-3">ID</th>
+              <th class="text-left font-bold py-2">User Story</th>
+              <th class="text-left font-bold py-2">Acceptatiecriteria</th>
+              <th class="text-left font-bold py-2">Prioriteit (MoSCoW)</th>
+          </tr>
+      </thead>
+      <tbody>
+          <!-- User Story 1 -->
+          <tr class="border-b">
+              <td class="py-2">1</td>
+              <td class="py-2">Als gebruiker wil ik een account kunnen aanmaken.</td>
+              <td class="py-2">- Registratieformulier invullen<br>- Accountgegevens opslaan</td>
+              <td class="py-2">Must have</td>
+          </tr>
+
+          <!-- User Story 2 -->
+          <tr class="border-b">
+              <td class="py-2">2</td>
+              <td class="py-2">Als gebruiker wil ik mijn fiets(en) aan Cycle-Gram kunnen toevoegen.</td>
+              <td class="py-2">- Fietsinformatie invoeren<br>- Fietsgegevens opslaan in het profiel</td>
+              <td class="py-2">Must have</td>
+          </tr>
+
+          <!-- User Story 3 -->
+          <tr class="border-b">
+              <td class="py-2">3</td>
+              <td class="py-2">Als gebruiker wil ik de fietsen van andere gebruikers kunnen bekijken.</td>
+              <td class="py-2">- Fietsen van andere gebruikers kunnen oproepen<br>- Details van de fiets bekijken</td>
+              <td class="py-2">Must have</td>
+          </tr>
+
+          <!-- User Story 4 -->
+          <tr class="border-b">
+              <td class="py-2">4</td>
+              <td class="py-2">Als gebruiker wil ik mijn gereden routes kunnen toevoegen.</td>
+              <td class="py-2">- Route-informatie invoeren<br>- Routegegevens opslaan</td>
+              <td class="py-2">Must have</td>
+          </tr>
+
+          <!-- User Story 5 -->
+          <tr class="border-b">
+              <td class="py-2">5</td>
+              <td class="py-2">Als gebruiker wil ik routes van andere gebruikers kunnen bekijken.</td>
+              <td class="py-2">- Routes van andere gebruikers kunnen oproepen<br>- Details van de route bekijken</td>
+              <td class="py-2">Must have</td>
+          </tr>
+
+          <!-- User Story 6 -->
+          <tr class="border-b">
+              <td class="py-2">6</td>
+              <td class="py-2">Als gebruiker wil ik evenementen kunnen aanmaken.</td>
+              <td class="py-2">- Evenementinformatie invoeren<br>- Evenementgegevens opslaan</td>
+              <td class="py-2">Must have</td>
+          </tr>
+
+          <!-- User Story 7 -->
+          <tr class="border-b">
+              <td class="py-2">7</td>
+              <td class="py-2">Als gebruiker wil ik kunnen deelnemen aan evenementen.</td>
+              <td class="py-2">- Inschrijven voor een evenement<br>- Evenementdetails bekijken</td>
+              <td class="py-2">Should have</td>
+          </tr>
+
+          <!-- User Story 8 -->
+          <tr class="border-b">
+              <td class="py-2">8</td>
+              <td class="py-2">Als gebruiker wil ik mijn profiel kunnen aanpassen.</td>
+              <td class="py-2">- Profielinformatie aanpassen<br>- Profielgegevens opslaan</td>
+              <td class="py-2">Should have</td>
+          </tr>
+
+          <!-- User Story 9 -->
+          <tr class="border-b">
+              <td class="py-2">9</td>
+              <td class="py-2">Als gebruiker wil ik mijn profiel kunnen verwijderen.</td>
+              <td class="py-2">- Profiel verwijderen</td>
+              <td class="py-2">Should have</td>
+          </tr>
+      </tbody>
+  </table>
+
+  <!-- ERD-sectie -->
+  <h2 class="text-2xl font-bold mb-4">About the ERD</h2>
+  <p class="mb-8">
+      Below is the ERD representing the data structure of Cycle-Gram.
+  </p>
+  <img *ngIf="imagePath" [src]="imagePath" alt="Cycle Gram ERD" class="mb-8 rounded-lg shadow-lg">
+</div>

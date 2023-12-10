@@ -7,6 +7,7 @@ import { ICycleEvent } from '@cycle-gram-web-main/shared/api';
 import { CycleEventService } from '../cycleevent.service';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { UserService } from '../../user/user.service';
 
 @Component({
   selector: 'cycle-gram-web-main-cycleevent-detail',
@@ -19,7 +20,8 @@ export class CycleEventDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private cycleeventService: CycleEventService
+    private cycleeventService: CycleEventService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -35,5 +37,10 @@ export class CycleEventDetailComponent implements OnInit {
         return selectedCycleEvent ? of(selectedCycleEvent) : of(null);
       })
     );
+  }
+
+  isOwner(cycleevent: ICycleEvent): boolean {
+    const loggedInUserId = this.userService.getLoggedInUserId();
+    return loggedInUserId === cycleevent.createdById;
   }
 }

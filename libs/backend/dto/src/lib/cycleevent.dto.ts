@@ -1,9 +1,9 @@
 import { IsNotEmpty, IsString, IsOptional } from 'class-validator';
 import {
   ICreateCycleEvent,
+  IUser,
   IUpdateCycleEvent,
   IUpsertCycleEvent,
-  IUser,
 } from '@cycle-gram-web-main/shared/api';
 
 export class CreateCycleEventDto implements ICreateCycleEvent {

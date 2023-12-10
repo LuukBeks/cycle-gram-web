@@ -10,6 +10,7 @@ export interface ICycleRoute { // Updated interface name
     gpx: string;
     startAdres: string;
     sort: CycleRouteSort;
+    ownerId?: Id;
 }
 
 export type ICreateCycleRoute = Pick<

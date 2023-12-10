@@ -5,6 +5,7 @@ import { ICycleEvent, ICycleRoute } from '@cycle-gram-web-main/shared/api';
 import { Subscription } from 'rxjs';
 import { CycleRouteService } from '../../cycleroute/cycleroute.service';
 import { NgZone } from '@angular/core';
+import { UserService } from '../../user/user.service';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class CycleEventListComponent implements OnInit, OnDestroy {
   constructor(
     private cycleeventService: CycleEventService,
     private cycleRouteService: CycleRouteService,
-    private zone: NgZone
+    private zone: NgZone,
+    private userService: UserService,
   ) {}
 
   ngOnInit(): void {
@@ -55,4 +57,88 @@ export class CycleEventListComponent implements OnInit, OnDestroy {
       );
     });
   }
+
+
+  participate(cycleevent: ICycleEvent): void {
+    // Get the logged-in user
+    const loggedInUser = this.userService.getLoggedInUser();
+  
+    // Check if loggedInUser is not null
+    if (loggedInUser) {
+      // Check if participants is defined
+      if (cycleevent.participants) {
+        // Check if the user has already participated
+        const index = cycleevent.participants.findIndex(participant => participant.id === loggedInUser.id);
+        if (index === -1) {
+          // Add the user to the participants list
+          cycleevent.participants.push(loggedInUser);
+  
+          // Update the cycle event
+          this.cycleeventService.update(cycleevent).subscribe(updatedCycleEvent => {
+            console.log('Updated cycle event:', updatedCycleEvent);
+          });
+        } else {
+          console.error('User has already participated');
+        }
+      } else {
+        // If participants is not defined, initialize it with the logged-in user
+        cycleevent.participants = [loggedInUser];
+  
+        // Update the cycle event
+        this.cycleeventService.update(cycleevent).subscribe(updatedCycleEvent => {
+          console.log('Updated cycle event:', updatedCycleEvent);
+        });
+      }
+    } else {
+      console.error('No user is logged in');
+    }
+  }
+
+  unparticipate(cycleevent: ICycleEvent): void {
+    // Get the logged-in user
+    const loggedInUser = this.userService.getLoggedInUser();
+  
+    // Check if loggedInUser is not null
+    if (loggedInUser) {
+      // Check if participants is defined
+      if (cycleevent.participants) {
+        // Check if the user has participated
+        const index = cycleevent.participants.findIndex(participant => participant.id === loggedInUser.id);
+        if (index !== -1) {
+          // Remove the user from the participants list
+          cycleevent.participants.splice(index, 1);
+  
+          // Update the cycle event
+          this.cycleeventService.update(cycleevent).subscribe(updatedCycleEvent => {
+            console.log('Updated cycle event:', updatedCycleEvent);
+          });
+        } else {
+          console.error('User has not participated');
+        }
+      } else {
+        console.error('No participants in this event');
+      }
+    } else {
+      console.error('No user is logged in');
+    }
+  }
+  
+  isParticipated(cycleevent: ICycleEvent): boolean {
+    // Get the logged-in user
+    const loggedInUser = this.userService.getLoggedInUser();
+  
+    // Check if loggedInUser is not null and participants is defined
+    if (loggedInUser && cycleevent.participants) {
+      // Check if the user has participated
+      return cycleevent.participants.some(participant => participant.id === loggedInUser.id);
+    }
+  
+    return false;
+  }
+
+  isOwner(cycleevent: ICycleEvent): boolean {
+    const loggedInUserId = this.userService.getLoggedInUserId();
+    return cycleevent.createdById === loggedInUserId;
+  }
+
 }

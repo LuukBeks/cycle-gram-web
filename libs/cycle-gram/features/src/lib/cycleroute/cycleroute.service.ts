@@ -10,6 +10,7 @@ import { ApiResponse, ICycleRoute } from '@cycle-gram-web-main/shared/api';
 import { Injectable } from '@angular/core';
 import { environment } from '@cycle-gram-web/shared/util-env';
 import { CycleRoute } from './cycleroute.model';
+import { UserService } from '../user/user.service';
 
 export const httpOptions = {
   observe: 'body',
@@ -20,9 +21,12 @@ export const httpOptions = {
   providedIn: 'root',
 })
 export class CycleRouteService {
-  endpoint = `${environment.backendUrl}/cycleroute`;
+  private endpoint = 'http://localhost:3000/api/cycleroute';
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private userService: UserService // Inject UserService
+  ) {}
 
   public list(options?: any): Observable<ICycleRoute[] | null> {
     console.log(`list cycleroute ${this.endpoint}`);
@@ -98,6 +102,19 @@ export class CycleRouteService {
     return this.http
       .delete<ApiResponse<ICycleRoute>>(`${this.endpoint}/${cycleroute.id}`)
       .pipe(tap(console.log), catchError(this.handleError));
+  }
+
+  public findUserByCycleRouteId(cycleRouteId: string): Observable<string | null> {
+    return this.userService.list().pipe(
+      map(users => {
+        if (users) {
+          const user = users.find(user => user.cycleRoutes && user.cycleRoutes.some(cycleRoute => cycleRoute.id === cycleRouteId));
+          return user ? user.id : null;
+        }
+        return null;
+      }),
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: HttpErrorResponse): Observable<any> {

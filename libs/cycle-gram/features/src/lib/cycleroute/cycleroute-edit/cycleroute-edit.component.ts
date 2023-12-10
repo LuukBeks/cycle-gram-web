@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { CycleRouteService } from '../cycleroute.service';
@@ -12,7 +12,7 @@ import { UserService } from '../../user/user.service';
   templateUrl: './cycleroute-edit.component.html',
   styleUrls: [],
 })
-export class CycleRouteEditComponent {
+export class CycleRouteEditComponent implements OnInit {
   cycleroute: ICycleRoute = {
     id: '',
     routeName: '',
@@ -90,6 +90,7 @@ export class CycleRouteEditComponent {
       );
     }
   }  
+  
   goBack(): void {
     this.router.navigate(['/cycleroute']);
   }

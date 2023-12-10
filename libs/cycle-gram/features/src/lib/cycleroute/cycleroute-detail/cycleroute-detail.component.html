@@ -1,25 +1,28 @@
 <div class="container mx-auto mt-8 p-8 bg-white rounded-md shadow-md">
   <ng-container *ngIf="(cycleroute$ | async) as cycleroute; else loading">
     <div class="flex flex-col md:flex-row items-center">
-      <div class="md:mr-8">
-        <img [src]="cycleroute.image" alt="CycleRoute Profile" class="w-full h-auto md:w-64 rounded-md shadow-md" />
-      </div>
       <div class="mt-4 md:mt-0">
         <h1 class="text-3xl font-bold">{{ cycleroute.routeName }}</h1>
         <p class="text-gray-600">{{ cycleroute.sort }}</p>
         <div class="mt-4">
-          <strong>start adres:</strong> {{ cycleroute.startAdres }}
+          <strong>Start Address:</strong> {{ cycleroute.startAdres }}
         </div>
         <div class="mt-4">
-          {{ cycleroute.distance }}
+          <strong>Distance:</strong> {{ cycleroute.distance }}
         </div>
-        <div class="mt-2">
-          <img [src]="cycleroute.image" alt="CycleRoute Profile" class="w-full h-auto md:w-64 rounded-md shadow-md" />
+        <div class="mt-4">
+          <strong>GPX:</strong> {{ cycleroute.gpx }}
         </div>
-          <button routerLink="/cycleroute/{{ cyclerouteId }}/edit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue">
+
+        <button *ngIf="canEdit" routerLink="/cycleroute/{{ cyclerouteId }}/edit" class="mt-6 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue">
           Edit CycleRoute
         </button>
       </div>
+    </div>
+
+    <!-- Place the image inside the details section -->
+    <div class="mt-8">
+      <img [src]="cycleroute.image" alt="CycleRoute Profile" class="w-full h-auto md:w-96 rounded-md shadow-md" />
     </div>
   </ng-container>
 
@@ -27,4 +30,3 @@
     <p class="text-gray-800">Loading cycleroute details...</p>
   </ng-template>
 </div>
-`

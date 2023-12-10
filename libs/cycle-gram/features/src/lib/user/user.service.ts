@@ -159,6 +159,23 @@ export class UserService {
     }
   }
 
+  public getLoggedInUser(): IUser | null {
+    const token = this.getAuthToken();
+    if (!token) {
+      return null;
+    }
+  
+    try {
+      const decodedToken: any = this.jwtHelper.decodeToken(token);
+      console.log('Decoded token:', decodedToken.sub);
+
+      return decodedToken.sub; // Use the correct field name
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
+  }
+
   private handleError(error: HttpErrorResponse): Observable<any> {
     console.log('handleError in UserService', error);
     return throwError(() => new Error(error.message));

@@ -27,4 +27,9 @@ export class UserListComponent implements OnInit, OnDestroy { // Updated class n
     ngOnDestroy(): void {
         if (this.subscription) this.subscription.unsubscribe();
     }
+
+    isOwner(user: IUser): boolean {
+        const loggedInUserId = this.userService.getLoggedInUserId();
+        return loggedInUserId === user.id;
+      }
 }
