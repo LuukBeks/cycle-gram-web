@@ -5,36 +5,73 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Name</label>
             <input type="text" id="name" name="name" [(ngModel)]="user.name" class="w-full px-3 py-2 border rounded-md"
                 required />
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="userEditForm.controls['name'].touched && userEditForm.controls['name'].hasError('required')">
+                    Name is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="dob">Date of Birth</label>
             <input type="date" id="dob" name="dob" [(ngModel)]="user.dob" class="w-full px-3 py-2 border rounded-md"
                 required />
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="userEditForm.controls['dob'].touched && userEditForm.controls['dob'].hasError('required')">
+                    Date of Birth is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
             <input type="email" id="email" name="email" [(ngModel)]="user.email"
                 class="w-full px-3 py-2 border rounded-md" required />
+
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="userEditForm.controls['email'].touched && userEditForm.controls['email'].hasError('required')">
+                    Email is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="phoneNumber">Phone Number</label>
             <input type="tel" id="phoneNumber" name="phoneNumber" [(ngModel)]="user.phoneNumber"
                 class="w-full px-3 py-2 border rounded-md" required />
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="userEditForm.controls['phoneNumber'].touched && userEditForm.controls['phoneNumber'].hasError('required')">
+                    Phone Number is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
             <input type="password" id="password" name="password" [(ngModel)]="user.password"
                 class="w-full px-3 py-2 border rounded-md" required />
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="userEditForm.controls['password'].touched && userEditForm.controls['password'].hasError('required')">
+                    Password is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="image">Image URL</label>
             <input type="text" id="image" name="image" [(ngModel)]="user.image"
                 class="w-full px-3 py-2 border rounded-md" required />
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="userEditForm.controls['image'].touched && userEditForm.controls['image'].hasError('required')">
+                    Image URL is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
@@ -44,6 +81,13 @@
                 <option value="Guest">Guest</option>
                 <option value="Other">Other</option>
             </select>
+
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="userEditForm.controls['sort'].touched && userEditForm.controls['sort'].hasError('required')">
+                    User Type is required
+                </span>
+            </div>
         </div>
 
         <div class="flex justify-between">
@@ -60,36 +104,73 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Name</label>
             <input type="text" id="name" name="name" [(ngModel)]="user.name" class="w-full px-3 py-2 border rounded-md"
                 required />
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="userEditForm.controls['name'].touched && userEditForm.controls['name'].hasError('required')">
+                    Name is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="dob">Date of Birth</label>
             <input type="date" id="dob" name="dob" [(ngModel)]="user.dob" class="w-full px-3 py-2 border rounded-md"
                 required />
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="userEditForm.controls['dob'].touched && userEditForm.controls['dob'].hasError('required')">
+                    Date of Birth is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
             <input type="email" id="email" name="email" [(ngModel)]="user.email"
                 class="w-full px-3 py-2 border rounded-md" required />
+
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="userEditForm.controls['email'].touched && userEditForm.controls['email'].hasError('required')">
+                    Email is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="phoneNumber">Phone Number</label>
             <input type="tel" id="phoneNumber" name="phoneNumber" [(ngModel)]="user.phoneNumber"
                 class="w-full px-3 py-2 border rounded-md" required />
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="userEditForm.controls['phoneNumber'].touched && userEditForm.controls['phoneNumber'].hasError('required')">
+                    Phone Number is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
             <input type="password" id="password" name="password" [(ngModel)]="user.password"
                 class="w-full px-3 py-2 border rounded-md" required />
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="userEditForm.controls['password'].touched && userEditForm.controls['password'].hasError('required')">
+                    Password is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="image">Image URL</label>
             <input type="text" id="image" name="image" [(ngModel)]="user.image"
                 class="w-full px-3 py-2 border rounded-md" required />
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="userEditForm.controls['image'].touched && userEditForm.controls['image'].hasError('required')">
+                    Image URL is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
@@ -99,6 +180,13 @@
                 <option value="Guest">Guest</option>
                 <option value="Other">Other</option>
             </select>
+
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="userEditForm.controls['sort'].touched && userEditForm.controls['sort'].hasError('required')">
+                    User Type is required
+                </span>
+            </div>
         </div>
 
         <div class="flex justify-between">

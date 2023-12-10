@@ -41,7 +41,7 @@ export class UserEditComponent implements OnInit {
 
       if (createMode) {
         // Handle create mode
-
+        console.log('Creating user:', this.user);
       } else {
         // Handle edit mode
         this.route.paramMap.subscribe((params) => {
@@ -73,7 +73,7 @@ export class UserEditComponent implements OnInit {
     this.userService.create(this.user).subscribe(
       (createdUser) => {
         console.log('User created successfully:', createdUser);
-        this.router.navigate(['../..'], { relativeTo: this.route });
+        this.router.navigate(['/users'], { relativeTo: this.route });
       },
       (error) => {
         console.error('Error creating user:', error);

@@ -3,34 +3,79 @@
     <form class="max-w-md mx-auto my-8" #cycleeventEditForm="ngForm" (ngSubmit)="createCycleEvent()">
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="date">Date</label>
-            <input type="text" id="date" name="date" [(ngModel)]="cycleevent.date" class="w-full px-3 py-2 border rounded-md" required />
+            <input type="text" id="date" name="date" [(ngModel)]="cycleevent.date"
+                class="w-full px-3 py-2 border rounded-md" required />
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="cycleeventEditForm.controls['date'].touched && cycleeventEditForm.controls['date'].hasError('required')">
+                    Date is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">Title</label>
-            <input type="text" id="title" name="title" [(ngModel)]="cycleevent.title" class="w-full px-3 py-2 border rounded-md" required />
+            <input type="text" id="title" name="title" [(ngModel)]="cycleevent.title"
+                class="w-full px-3 py-2 border rounded-md" required />
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="cycleeventEditForm.controls['title'].touched && cycleeventEditForm.controls['title'].hasError('required')">
+                    Title is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="description">Description</label>
-            <textarea id="description" name="description" [(ngModel)]="cycleevent.description" class="w-full px-3 py-2 border rounded-md" required></textarea>
+            <textarea id="description" name="description" [(ngModel)]="cycleevent.description"
+                class="w-full px-3 py-2 border rounded-md" required></textarea>
+
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="cycleeventEditForm.controls['description'].touched && cycleeventEditForm.controls['description'].hasError('required')">
+                    Description is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="location">Location</label>
-            <input type="text" id="location" name="location" [(ngModel)]="cycleevent.location" class="w-full px-3 py-2 border rounded-md" required />
+            <input type="text" id="location" name="location" [(ngModel)]="cycleevent.location"
+                class="w-full px-3 py-2 border rounded-md" required />
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="cycleeventEditForm.controls['location'].touched && cycleeventEditForm.controls['location'].hasError('required')">
+                    Location is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="maxParticipants">Max Participants</label>
-            <input type="number" id="maxParticipants" name="maxParticipants" [(ngModel)]="cycleevent.maxParticipants" class="w-full px-3 py-2 border rounded-md" required />
+            <input type="number" id="maxParticipants" name="maxParticipants" [(ngModel)]="cycleevent.maxParticipants"
+                class="w-full px-3 py-2 border rounded-md" required />
+
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="cycleeventEditForm.controls['maxParticipants'].touched && cycleeventEditForm.controls['maxParticipants'].hasError('required')">
+                    Max Participants is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="route">Select Route</label>
-            <select id="route" name="route" [(ngModel)]="cycleevent.routes" class="w-full px-3 py-2 border rounded-md" required>
-                <option *ngFor="let cycleRoute of cycleRoutes" [value]="cycleRoute.id">{{ cycleRoute.routeName }}</option>
+            <select id="route" name="route" [(ngModel)]="cycleevent.routes" class="w-full px-3 py-2 border rounded-md"
+                required>
+                <option *ngFor="let cycleRoute of cycleRoutes" [value]="cycleRoute.id">{{ cycleRoute.routeName }}
+                </option>
             </select>
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="cycleeventEditForm.controls['route'].touched && cycleeventEditForm.controls['route'].hasError('required')">
+                    Route is required
+                </span>
+            </div>
         </div>
 
         <div class="flex justify-between">
@@ -45,34 +90,81 @@
     <form class="max-w-md mx-auto my-8" #cycleeventEditForm="ngForm" (ngSubmit)="editCycleEvent()">
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="date">Date</label>
-            <input type="text" id="date" name="date" [(ngModel)]="cycleevent.date" class="w-full px-3 py-2 border rounded-md" required />
+            <input type="text" id="date" name="date" [(ngModel)]="cycleevent.date"
+                class="w-full px-3 py-2 border rounded-md" required />
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="cycleeventEditForm.controls['date'].touched && cycleeventEditForm.controls['date'].hasError('required')">
+                    Date is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">Title</label>
-            <input type="text" id="title" name="title" [(ngModel)]="cycleevent.title" class="w-full px-3 py-2 border rounded-md" required />
+            <input type="text" id="title" name="title" [(ngModel)]="cycleevent.title"
+                class="w-full px-3 py-2 border rounded-md" required />
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="cycleeventEditForm.controls['title'].touched && cycleeventEditForm.controls['title'].hasError('required')">
+                    Title is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="description">Description</label>
-            <textarea id="description" name="description" [(ngModel)]="cycleevent.description" class="w-full px-3 py-2 border rounded-md" required></textarea>
+            <textarea id="description" name="description" [(ngModel)]="cycleevent.description"
+                class="w-full px-3 py-2 border rounded-md" required></textarea>
+
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="cycleeventEditForm.controls['description'].touched && cycleeventEditForm.controls['description'].hasError('required')">
+                    Description is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="location">Location</label>
-            <input type="text" id="location" name="location" [(ngModel)]="cycleevent.location" class="w-full px-3 py-2 border rounded-md" required />
+            <input type="text" id="location" name="location" [(ngModel)]="cycleevent.location"
+                class="w-full px-3 py-2 border rounded-md" required />
+
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="cycleeventEditForm.controls['location'].touched && cycleeventEditForm.controls['location'].hasError('required')">
+                    Location is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="maxParticipants">Max Participants</label>
-            <input type="number" id="maxParticipants" name="maxParticipants" [(ngModel)]="cycleevent.maxParticipants" class="w-full px-3 py-2 border rounded-md" required />
+            <input type="number" id="maxParticipants" name="maxParticipants" [(ngModel)]="cycleevent.maxParticipants"
+                class="w-full px-3 py-2 border rounded-md" required />
+
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="cycleeventEditForm.controls['maxParticipants'].touched && cycleeventEditForm.controls['maxParticipants'].hasError('required')">
+                    Max Participants is required
+                </span>
+            </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="route">Select Route</label>
-            <select id="route" name="route" [(ngModel)]="cycleevent.routes" class="w-full px-3 py-2 border rounded-md" required>
-                <option *ngFor="let cycleRoute of cycleRoutes" [value]="cycleRoute.id">{{ cycleRoute.routeName }}</option>
+            <select id="route" name="route" [(ngModel)]="cycleevent.routes" class="w-full px-3 py-2 border rounded-md"
+                required>
+                <option *ngFor="let cycleRoute of cycleRoutes" [value]="cycleRoute.id">{{ cycleRoute.routeName }}
+                </option>
             </select>
+
+            <div>
+                <span class="text-red-500 text-xs italic"
+                    *ngIf="cycleeventEditForm.controls['route'].touched && cycleeventEditForm.controls['route'].hasError('required')">
+                    Route is required
+                </span>
+            </div>
         </div>
 
         <div class="flex justify-between">
