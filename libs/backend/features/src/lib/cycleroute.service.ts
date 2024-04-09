@@ -6,6 +6,7 @@ import { ICycleRoute } from '@cycle-gram-web-main/shared/api';
 import { Logger } from '@nestjs/common';
 import { CreateCycleRouteDto, UpdateCycleRouteDto } from '@cycle-gram-web-main/backend/dto';
 import { UserService } from './user.service'; // import UserService
+import { NeoService } from './neo.service';
 
 @Injectable()
 export class CycleRouteService {
@@ -14,6 +15,7 @@ export class CycleRouteService {
   constructor(
     @InjectModel(CycleRouteModel.name) private cyclerouteModel: Model<ICycleRoute>,
     private userService: UserService, // inject UserService
+    private neoService: NeoService // inject NeoService
   ) {}
   TAG = 'CycleRouteService';
 
@@ -40,19 +42,27 @@ export class CycleRouteService {
     cycleroute.id = newNumericId.toString();
 
     const createdItem = await this.cyclerouteModel.create(cycleroute);
+    await this.neoService.addOrUpdateCycleRoute(createdItem); // add cycle route to neo4j
     return createdItem;
   }
 
   async update(id: string, cycleroute: UpdateCycleRouteDto): Promise<ICycleRoute | null> {
-    const updated = await this.cyclerouteModel.findOneAndUpdate({ id }, cycleroute);
+    const updated = await this.cyclerouteModel.findOneAndUpdate({ id }, cycleroute, { new: true });
+    if (updated) {
+      await this.neoService.addOrUpdateCycleRoute(updated); // update cycle route in neo4j
+    }
     return updated;
   }
 
   async deleteCycleRoute(id: string): Promise<void> {
     // Delete the cycle route from the cycle route collection
-    await this.cyclerouteModel.findOneAndDelete({ id }).exec();
-  
-    // Delete the cycle route from the user's cycle routes array
+    const result = await this.cyclerouteModel.findOneAndDelete({ id });
+    Logger.log(`result = ${result}`, this.TAG);
+    const delCycleRoute = result as unknown as ICycleRoute; // Cast result to ICycleRoute
     await this.userService.deleteCycleroute(id);
+    if (delCycleRoute) {
+      await this.neoService.deleteCycleRoute(delCycleRoute);
+    }
   }
+
 }

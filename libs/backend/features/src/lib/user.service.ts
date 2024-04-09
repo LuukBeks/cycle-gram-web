@@ -85,7 +85,6 @@ export class UserService {
   
     user.bicycles = user.bicycles.filter(bicycle => bicycle.id !== bicycleId);
     await user.save();
-    console.log('user', user);
   
     return user;
   }

@@ -6,12 +6,14 @@ import { IBicycle } from '@cycle-gram-web-main/shared/api';
 import { Logger } from '@nestjs/common';
 import { CreateBicycleDto, UpdateBicycleDto } from '@cycle-gram-web-main/backend/dto';
 import { UserService } from './user.service';
+import { NeoService } from './neo.service';
 
 @Injectable()
 export class BicycleService {
   constructor(
     @InjectModel(Bicycle.name) private bicycleModel: Model<IBicycle>,
     private userService: UserService, // inject UserService
+    private neoService: NeoService // inject NeoService
   ) {}
   TAG = 'BicycleService';
 
@@ -38,16 +40,25 @@ export class BicycleService {
     bicycle.id = newNumericId.toString();
 
     const createdItem = await this.bicycleModel.create(bicycle);
+    await this.neoService.addOrUpdateBicycle(createdItem); // add bicycle to neo4j
     return createdItem;
   }
 
   async update(id: string, bicycle: UpdateBicycleDto): Promise<IBicycle | null> {
-    const updated = await this.bicycleModel.findOneAndUpdate({ id }, bicycle);
+    const updated = await this.bicycleModel.findOneAndUpdate({ id }, bicycle, { new: true });
+    if (updated) {
+      await this.neoService.addOrUpdateBicycle(updated); // update bicycle in neo4j
+    }
     return updated;
   }
-
+  
   async deleteBicycle(id: string): Promise<void> {
-    await this.bicycleModel.findOneAndDelete({ id }).exec();
+    const result = await this.bicycleModel.findOneAndDelete({ id });
+    Logger.log(`result = ${result}`, this.TAG);
+    const delbicycle = result as unknown as IBicycle; // Cast result to IBicycle
     await this.userService.deleteBicycle(id); // delete bicycle from user
+    if (delbicycle) {
+      await this.neoService.deleteBicycle(delbicycle); // delete bicycle from neo4j
+    }
   }
 }
